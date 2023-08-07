@@ -15,7 +15,7 @@ import java.util.Optional;
 @RequestMapping("/admins")
 public class AdminController {
     private AdminService adminService;//Bunlar adminRepository idi, controllerdan bağlanmak için serviceRepo yaptık.
-
+//alperen
     public AdminController(AdminService adminService) {
         this.adminService = adminService;
     }
