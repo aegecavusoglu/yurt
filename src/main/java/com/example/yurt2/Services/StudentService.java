@@ -26,12 +26,11 @@ public class StudentService {
             Student foundStudent=student.get();
             foundStudent.setName(newStudent.getName());
             foundStudent.setSurname(newStudent.getSurname());
-            foundStudent.setRoom(newStudent.getRoom());
             foundStudent.setSchool(newStudent.getSchool());
-            foundStudent.setAdressId(newStudent.getAdressId());
-            foundStudent.setFamilyNumber(newStudent.getFamilyNumber());
+            foundStudent.setAdress_id(newStudent.getAdress_id());
+            foundStudent.setFamily_number(newStudent.getFamily_number());
             foundStudent.setPhone_number(newStudent.getPhone_number());
-            foundStudent.setIdentityNumber(newStudent.getIdentityNumber());
+            foundStudent.setIdentity_number(newStudent.getIdentity_number());
             studentRepository.save(foundStudent);
             return foundStudent;
         }
