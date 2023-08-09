@@ -16,17 +16,13 @@ public class DormitoryController {
     public DormitoryController(DormitoryService dormitoryService) {
         this.dormitoryService = dormitoryService;
     }
-    @GetMapping
-    public List<Dormitory> getAllDormitories(@RequestParam Optional<Long> adminId){
-        return dormitoryService.getAllDormitories(adminId);
-    }
     @PostMapping
     public Dormitory createOneDormitory(@RequestBody DormitoryCreateRequest newDormitoryRequest){
         return dormitoryService.createOneDormitory(newDormitoryRequest);
     }
     @GetMapping("/{dormitoryId}")
-    public Dormitory getOneDormitory(@PathVariable Long dormitoryId){
-        return dormitoryService.getOneDormitoryById(dormitoryId);
+    public Dormitory getDormitory(@PathVariable Long dormitoryId){
+        return dormitoryService.getDormitory(dormitoryId);
     }
 
 

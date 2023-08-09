@@ -8,41 +8,48 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-@Data
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name="Dormitory")
+@Table(name="dormitory")
 public class Dormitory {
     @Id
-    @Column(name="Id")
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="adminId",nullable = false)
 
-    Admin admin;
-
-    @Column(name="Name")
+    @Column(name="name")
     private String name;
-
-    /*@Column(name="ContractStartDate")
-    private Date contract_start_date;
-    @Column(name="ContractEndDate")
-    private Date contract_end_date;
-    */
-    @Column(name="IsValid")
-    private boolean is_valid;
-    @Column(name="AddressId")
+    @Column(name="address_id")
     private int address_id;
 
-    //@Column(name="RoomId")
-    //private int room_id;
+    public Dormitory(Long id, String name, int address_id) {
+        this.id = id;
+        this.name = name;
+        this.address_id = address_id;
+    }
+    public Dormitory(){}
+
+    public Long getId() {
+        return id;
+    }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public Long getId() {
-        return id;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+    public int getAddress_id() {
+        return address_id;
+    }
+
+    public void setAddress_id(int address_id) {
+        this.address_id = address_id;
     }
 }

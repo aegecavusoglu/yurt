@@ -8,5 +8,4 @@ import java.util.List;
 
 public interface DormitoryRepository extends JpaRepository<Dormitory,Long> {
 
-    List<Dormitory> findByAdminId(Long adminId);
 }
