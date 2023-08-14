@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.LongSummaryStatistics;
 
 @Entity
 @Table(name="dormitory")
@@ -19,11 +20,11 @@ public class Dormitory {
     @Column(name="name")
     private String name;
     @Column(name="address_id")
-    private int address_id;
+    private Long address_id;
     @Column(name="general_capacity")
     private int general_capacity;
 
-    public Dormitory(Long id, String name, int address_id, int general_capacity) {
+    public Dormitory(Long id, String name, Long address_id, int general_capacity) {
         this.id = id;
         this.name = name;
         this.address_id = address_id;
@@ -48,11 +49,11 @@ public class Dormitory {
     }
 
 
-    public int getAddress_id() {
+    public Long getAddress_id() {
         return address_id;
     }
 
-    public void setAddress_id(int address_id) {
+    public void setAddress_id(Long address_id) {
         this.address_id = address_id;
     }
 

@@ -25,13 +25,13 @@ public class Student {
     @Column(name="family_number")
     private String family_number;
     @Column(name="address_id")
-    private String address_id;
+    private Long address_id;
     @Column(name="school_name")
     private String school_name;
     @Column(name ="room_id")
     private int room_id;
 
-    public Student(Long id, String identity_number, String name, String surname, String phone_number, String family_number, String address_id, String school_name ,int room_id) {
+    public Student(Long id, String identity_number, String name, String surname, String phone_number, String family_number, Long address_id, String school_name ,int room_id) {
         this.id = id;
         this.identity_number = identity_number;
         this.name = name;
@@ -92,11 +92,11 @@ public class Student {
         this.family_number = family_number;
     }
 
-    public String getAddress_id() {
+    public Long getAddress_id() {
         return address_id;
     }
 
-    public void setAddress_id(String address_id) {
+    public void setAddress_id(Long address_id) {
         this.address_id = address_id;
     }
 
