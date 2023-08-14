@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/dormitories")
+@RequestMapping("/dormitory")
 public class DormitoryController {
     DormitoryService dormitoryService;
 
@@ -23,8 +23,8 @@ public class DormitoryController {
     public Dormitory getOneDormitory(@PathVariable Long dormitory_id){
         return dormitoryService.getOneDormitory(dormitory_id);
     }
-    @PostMapping
-    public Dormitory createOneDormitory(Dormitory new_dormitory){
+    @PostMapping("/create")
+    public Dormitory createOneDormitory(@RequestBody Dormitory new_dormitory){
         return dormitoryService.createOneDormitory(new_dormitory);
     }
     @PutMapping("/{dormitory_id}")
