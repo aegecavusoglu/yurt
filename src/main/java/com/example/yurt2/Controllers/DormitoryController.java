@@ -15,14 +15,28 @@ public class DormitoryController {
     public DormitoryController(DormitoryService dormitoryService) {
         this.dormitoryService = dormitoryService;
     }
+    @GetMapping
+    public List<Dormitory> getAllDormitories(){
+        return dormitoryService.getAllDormitories();
+    }
+    @GetMapping("/{dormitoryId}")
+    public Dormitory getOneDormitory(@PathVariable Long dormitory_id){
+        return dormitoryService.getOneDormitory(dormitory_id);
+    }
     @PostMapping
     public Dormitory createOneDormitory(Dormitory new_dormitory){
         return dormitoryService.createOneDormitory(new_dormitory);
     }
-    @GetMapping("/{dormitoryId}")
-    public Dormitory getDormitory(@PathVariable Long dormitoryId){
-        return dormitoryService.getDormitory(dormitoryId);
+    @PutMapping("/{dormitory_id}")
+    public Dormitory updateOneDormitory(@PathVariable Long dormitory_id,@RequestBody Dormitory new_dormitory){
+        return dormitoryService.updateOneDormitory(dormitory_id,new_dormitory);
     }
+
+    @DeleteMapping("/{dormitory_id}")
+    public void deleteOneDormitory(@PathVariable Long dormitory_id){
+        dormitoryService.deleteById(dormitory_id);
+    }
+
 
 
 }
