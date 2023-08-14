@@ -20,11 +20,14 @@ public class Dormitory {
     private String name;
     @Column(name="address_id")
     private int address_id;
+    @Column(name="general_capacity")
+    private int general_capacity;
 
-    public Dormitory(Long id, String name, int address_id) {
+    public Dormitory(Long id, String name, int address_id, int general_capacity) {
         this.id = id;
         this.name = name;
         this.address_id = address_id;
+        this.general_capacity = general_capacity;
     }
     public Dormitory(){}
 
@@ -51,5 +54,13 @@ public class Dormitory {
 
     public void setAddress_id(int address_id) {
         this.address_id = address_id;
+    }
+
+    public int getGeneral_capacity() {
+        return general_capacity;
+    }
+
+    public void setGeneral_capacity(int general_capacity) {
+        this.general_capacity = general_capacity;
     }
 }

@@ -18,16 +18,14 @@ public class Room {
     private Long id;
     @Column(name="room_number")
     private int room_number;
-    @Column(name="room_capacity")
-    private int room_capacity;
-    @Column(name="student_id")
-    private int student_id;
+    @Column(name="dormitory_id")
+    private int dormitory_id;
 
-    public Room(Long id, int room_number, int room_capacity, int student_id) {
+
+    public Room(Long id, int room_number, int dormitory_id) {
         this.id = id;
         this.room_number = room_number;
-        this.room_capacity = room_capacity;
-        this.student_id = student_id;
+        this.dormitory_id = dormitory_id;
     }
     public Room(){}
 
@@ -47,19 +45,11 @@ public class Room {
         this.room_number = room_number;
     }
 
-    public int getRoom_capacity() {
-        return room_capacity;
-    }
-
-    public void setRoom_capacity(int room_capacity) {
-        this.room_capacity = room_capacity;
-    }
-
     public int getStudent_id() {
-        return student_id;
+        return dormitory_id;
     }
 
-    public void setStudent_id(int student_id) {
-        this.student_id = student_id;
+    public void setStudent_id(int dormitory_id) {
+        this.dormitory_id = dormitory_id;
     }
 }

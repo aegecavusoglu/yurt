@@ -1,7 +1,6 @@
 package com.example.yurt2.Controllers;
 
 import com.example.yurt2.Entities.Dormitory;
-import com.example.yurt2.Requests.DormitoryCreateRequest;
 import com.example.yurt2.Services.DormitoryService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +16,8 @@ public class DormitoryController {
         this.dormitoryService = dormitoryService;
     }
     @PostMapping
-    public Dormitory createOneDormitory(@RequestBody DormitoryCreateRequest newDormitoryRequest){
-        return dormitoryService.createOneDormitory(newDormitoryRequest);
+    public Dormitory createOneDormitory(Dormitory new_dormitory){
+        return dormitoryService.createOneDormitory(new_dormitory);
     }
     @GetMapping("/{dormitoryId}")
     public Dormitory getDormitory(@PathVariable Long dormitoryId){

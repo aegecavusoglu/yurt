@@ -1,7 +1,6 @@
 package com.example.yurt2.Controllers;
 
 import com.example.yurt2.Entities.Student;
-import com.example.yurt2.Requests.StudentCreateRequest;
 import com.example.yurt2.Services.StudentService;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,8 +12,8 @@ public class StudentController {
     private StudentService student_service;
     public StudentController(StudentService student_service){this.student_service=student_service; }
     @PostMapping
-    public Student createStudent(@RequestBody StudentCreateRequest new_student_request){
-        return student_service.createStudent(new_student_request);
+    public Student createStudent(Student new_student){
+        return student_service.createStudent(new_student);
     }
     @GetMapping("/{studentId}")
     public Student getOneStudent(@PathVariable Long student_id){

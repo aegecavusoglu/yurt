@@ -2,9 +2,6 @@ package com.example.yurt2.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -18,7 +15,7 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name="identity_number")
-    private String identity_number;//Kontrol et
+    private String identity_number;
     @Column(name="name")
     private String name;
     @Column(name="surname")
@@ -27,20 +24,23 @@ public class Student {
     private String phone_number;
     @Column(name="family_number")
     private String family_number;
-    @Column(name="adress_id")
-    private String adress_id;
-    @Column(name="school")
-    private String school;
+    @Column(name="address_id")
+    private String address_id;
+    @Column(name="school_name")
+    private String school_name;
+    @Column(name ="room_id")
+    private int room_id;
 
-    public Student(Long id, String identity_number, String name, String surname, String phone_number, String family_number, String adress_id, String school) {
+    public Student(Long id, String identity_number, String name, String surname, String phone_number, String family_number, String address_id, String school_name ,int room_id) {
         this.id = id;
         this.identity_number = identity_number;
         this.name = name;
         this.surname = surname;
         this.phone_number = phone_number;
         this.family_number = family_number;
-        this.adress_id = adress_id;
-        this.school = school;
+        this.address_id = address_id;
+        this.school_name = school_name;
+        this.room_id = room_id;
     }
     public Student(){}
 
@@ -92,19 +92,27 @@ public class Student {
         this.family_number = family_number;
     }
 
-    public String getAdress_id() {
-        return adress_id;
+    public String getAddress_id() {
+        return address_id;
     }
 
-    public void setAdress_id(String adress_id) {
-        this.adress_id = adress_id;
+    public void setAddress_id(String address_id) {
+        this.address_id = address_id;
     }
 
-    public String getSchool() {
-        return school;
+    public String getSchool_name() {
+        return school_name;
     }
 
-    public void setSchool(String school) {
-        this.school = school;
+    public void setSchool_name(String school_name) {
+        this.school_name = school_name;
+    }
+
+    public int getRoom_id() {
+        return room_id;
+    }
+
+    public void setRoom_id(int room_id) {
+        this.room_id = room_id;
     }
 }
