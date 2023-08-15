@@ -4,10 +4,7 @@ import com.example.yurt2.Entities.Room;
 import com.example.yurt2.Entities.RoomClassification;
 import com.example.yurt2.Repos.RoomClassificationRepository;
 import com.example.yurt2.Services.RoomClassificationService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,5 +25,18 @@ public class RoomClassificationController {
     public RoomClassification getOneRoomType(@PathVariable Long roomType){
         return roomClassificationService.getOneRoomType(roomType);
     }
+    @PostMapping("/create")
+    public RoomClassification createOneRoomClassification(@RequestBody RoomClassification newRoomClassification){
+        return roomClassificationService.createOneRoomClassification(newRoomClassification);
+    }
+    @PutMapping("/update/{roomType}")
+    public RoomClassification updateOneRoomClassification(@PathVariable Long roomType,@RequestBody RoomClassification newRoomClassification){
+        return roomClassificationService.updateOneRoomClassification(roomType,newRoomClassification);
+    }
+    @DeleteMapping("/delete/{roomType}")
+    public void deleteOneRoomClassification(@PathVariable Long roomType){
+        roomClassificationService.deleteById(roomType);
+    }
+
 
 }

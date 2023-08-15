@@ -12,22 +12,24 @@ public class StudentContract {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name="student_id")
-    private Long student_id;
+    private Long studentId;
     @Column(name="contract_start_date")
-    private Date contract_start_date;
+    private Date contractStartDate;
     @Column(name="contract_end_date")
-    private Date contract_end_date;
+    private Date contractEndDate;
     @Column(name = "is_valid")
-    private boolean is_valid;
+    private boolean isValid;
 
-    public StudentContract(Long id, Long student_id, Date contract_start_date, Date contract_end_date, boolean is_valid) {
+    public StudentContract(Long id, Long studentId, Date contractStartDate, Date contractEndDate, boolean isValid) {
         this.id = id;
-        this.student_id = student_id;
-        this.contract_start_date = contract_start_date;
-        this.contract_end_date = contract_end_date;
-        this.is_valid = is_valid;
+        this.studentId = studentId;
+        this.contractStartDate = contractStartDate;
+        this.contractEndDate = contractEndDate;
+        this.isValid = isValid;
     }
-    public StudentContract(){}
+
+    public StudentContract() {
+    }
 
     public Long getId() {
         return id;
@@ -37,35 +39,35 @@ public class StudentContract {
         this.id = id;
     }
 
-    public Long getStudent_id() {
-        return student_id;
+    public Long getStudentId() {
+        return studentId;
     }
 
-    public void setStudent_id(Long student_id) {
-        this.student_id = student_id;
+    public void setStudentId(Long studentId) {
+        this.studentId = studentId;
     }
 
-    public Date getContract_start_date() {
-        return contract_start_date;
+    public Date getContractStartDate() {
+        return contractStartDate;
     }
 
-    public void setContract_start_date(Date contract_start_date) {
-        this.contract_start_date = contract_start_date;
+    public void setContractStartDate(Date contractStartDate) {
+        this.contractStartDate = contractStartDate;
     }
 
-    public Date getContract_end_date() {
-        return contract_end_date;
+    public Date getContractEndDate() {
+        return contractEndDate;
     }
 
-    public void setContract_end_date(Date contract_end_date) {
-        this.contract_end_date = contract_end_date;
+    public void setContractEndDate(Date contractEndDate) {
+        this.contractEndDate = contractEndDate;
     }
 
-    public boolean isIs_valid() {
-        return is_valid;
+    public boolean isValid() {
+        return isValid;
     }
 
-    public void setIs_valid(boolean is_valid) {
-        this.is_valid = is_valid;
+    public void setValid(boolean valid) {
+        isValid = valid;
     }
 }
