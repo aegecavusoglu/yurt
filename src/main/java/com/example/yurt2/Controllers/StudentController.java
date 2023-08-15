@@ -9,23 +9,23 @@ import java.util.List;
 @RestController
 @RequestMapping("/student")
 public class StudentController {
-    private StudentService student_service;
-    public StudentController(StudentService student_service){this.student_service=student_service; }
+    private StudentService studentService;
+    public StudentController(StudentService studentService){this.studentService=studentService; }
     @PostMapping("/create")
-    public Student createStudent(@RequestBody Student new_student){
-        return student_service.createStudent(new_student);
+    public Student createStudent(@RequestBody Student newStudent){
+        return studentService.createStudent(newStudent);
     }
     @GetMapping("/{studentId}")
-    public Student getOneStudent(@PathVariable Long student_id){
-        return student_service.getOneStudentById(student_id);
+    public Student getOneStudent(@PathVariable Long studentId){
+        return studentService.getOneStudentById(studentId);
     }
     @GetMapping
     public List<Student> gelAllStudent(){
-        return student_service.getAllStudents();
+        return studentService.getAllStudents();
     }
     @PutMapping("/update/{studentId}")
-    public Student updateStudent(@PathVariable Long student_id, @RequestBody Student new_student){
-        return student_service.updateStudent(student_id,new_student);
+    public Student updateStudent(@PathVariable Long studentId, @RequestBody Student newStudent){
+        return studentService.updateStudent(studentId,newStudent);
     }
 
 }

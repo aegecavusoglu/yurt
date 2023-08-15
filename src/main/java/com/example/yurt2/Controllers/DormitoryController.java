@@ -20,8 +20,8 @@ public class DormitoryController {
         return dormitoryService.getAllDormitories();
     }
     @GetMapping("/{dormitoryId}")
-    public Dormitory getOneDormitory(@PathVariable Long dormitory_id){
-        return dormitoryService.getOneDormitory(dormitory_id);
+    public Dormitory getOneDormitory(@PathVariable Long dormitoryId){
+        return dormitoryService.getOneDormitory(dormitoryId);
     }
     @PostMapping("/create")
     public Dormitory createOneDormitory(@RequestBody Dormitory new_dormitory){

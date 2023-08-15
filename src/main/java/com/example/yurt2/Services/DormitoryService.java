@@ -18,8 +18,8 @@ public class DormitoryService {
     public List<Dormitory> getAllDormitories() {
         return dormitory_repository.findAll();
     }
-    public Dormitory getOneDormitory(Long dormitory_id) {
-        return dormitory_repository.findById(dormitory_id).orElse(null);
+    public Dormitory getOneDormitory(Long dormitoryId) {
+        return dormitory_repository.findById(dormitoryId).orElse(null);
     }
 
     public Dormitory createOneDormitory(Dormitory new_dormitory) {
