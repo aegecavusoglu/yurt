@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/students")
+@RequestMapping("/student")
 public class StudentController {
     private StudentService student_service;
     public StudentController(StudentService student_service){this.student_service=student_service; }
-    @PostMapping
-    public Student createStudent(Student new_student){
+    @PostMapping("/create")
+    public Student createStudent(@RequestBody Student new_student){
         return student_service.createStudent(new_student);
     }
     @GetMapping("/{studentId}")
@@ -23,8 +23,8 @@ public class StudentController {
     public List<Student> gelAllStudent(){
         return student_service.getAllStudents();
     }
-    @PutMapping
-    public Student updateStudent(Long student_id, Student new_student){
+    @PutMapping("/update/{studentId}")
+    public Student updateStudent(@PathVariable Long student_id, @RequestBody Student new_student){
         return student_service.updateStudent(student_id,new_student);
     }
 
