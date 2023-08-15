@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -17,16 +18,18 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name="room_number")
-    private int room_number;
-    @Column(name="dormitory_id")
-    private int dormitory_id;
+    private int roomNumber;
+    @Getter
+    @Column(name="room_classification_id")
+    private int roomClassificationId;
 
 
-    public Room(Long id, int room_number, int dormitory_id) {
+    public Room(Long id, int roomNumber, int roomClassificationId) {
         this.id = id;
-        this.room_number = room_number;
-        this.dormitory_id = dormitory_id;
+        this.roomNumber = roomNumber;
+        this.roomClassificationId = roomClassificationId;
     }
+
     public Room(){}
 
     public Long getId() {
@@ -37,19 +40,19 @@ public class Room {
         this.id = id;
     }
 
-    public int getRoom_number() {
-        return room_number;
+    public int getRoomNumber() {
+        return roomNumber;
     }
 
-    public void setRoom_number(int room_number) {
-        this.room_number = room_number;
+    public void setRoomNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
     }
 
-    public int getStudent_id() {
-        return dormitory_id;
+    public void setRoomClassificationId(int roomClassificationId) {
+        this.roomClassificationId = roomClassificationId;
     }
 
-    public void setStudent_id(int dormitory_id) {
-        this.dormitory_id = dormitory_id;
+    public int getRoomClassificationId() {
+        return roomClassificationId;
     }
 }
