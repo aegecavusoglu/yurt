@@ -23,6 +23,10 @@ public class DormitoryController {
     public Dormitory getOneDormitory(@PathVariable Long dormitoryId){
         return dormitoryService.getOneDormitory(dormitoryId);
     }
+    @GetMapping("/capacity/{dormitoryId}")
+    public int getCapacity(@PathVariable Long dormitoryId){
+        return dormitoryService.getCapacity(dormitoryId);
+    }
     @PostMapping("/create")
     public Dormitory createOneDormitory(@RequestBody Dormitory new_dormitory){
         return dormitoryService.createOneDormitory(new_dormitory);
