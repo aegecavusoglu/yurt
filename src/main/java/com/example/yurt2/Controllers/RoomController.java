@@ -35,9 +35,9 @@ public class RoomController {
     public Room updateOneRoom(@PathVariable Long roomNumber, @RequestBody Room newRoom) {
         return roomService.updateOneRoom(roomNumber, newRoom);
     }
-    @DeleteMapping("/delete/{roomNumber}")
-    public void deleteOneRoom(@PathVariable Long roomNumber){
-        roomService.deleteById(roomNumber);
+    @DeleteMapping("/delete/{roomId}")
+    public void deleteOneRoom(@PathVariable Long roomId){
+        roomService.deleteById(roomId);
     }
 
 

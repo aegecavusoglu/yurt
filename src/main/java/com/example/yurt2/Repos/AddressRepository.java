@@ -1,4 +1,7 @@
 package com.example.yurt2.Repos;
 
-public interface AddressRepository {
+import com.example.yurt2.Entities.Address;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AddressRepository extends JpaRepository<Address,Long> {
 }

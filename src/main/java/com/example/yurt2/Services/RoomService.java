@@ -48,7 +48,7 @@ public class RoomService {
         }
     }
 
-    public void deleteById(Long roomNumber) {
-        roomRepository.deleteById(roomNumber);
+    public void deleteById(Long roomId) {
+        roomRepository.deleteById(roomId);
     }
 }
