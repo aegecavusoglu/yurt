@@ -36,7 +36,7 @@ public class RoomService{
 
     public Room createOneRoom(Room newRoom) {
         roomRepository.save(newRoom);
-        dormitoryService.getCapacity(newRoom.getDormitoryId());
+        dormitoryService.getCapacity(roomRepository.findDormitoryId(newRoom.getId()));
         return newRoom;
     }
 
@@ -47,7 +47,7 @@ public class RoomService{
             foundRoom.setRoomNumber(newRoom.getRoomNumber());
             foundRoom.setRoomClassificationId(newRoom.getRoomClassificationId());
             roomRepository.save(foundRoom);
-            dormitoryService.getCapacity(foundRoom.getDormitoryId());
+            dormitoryService.getCapacity(roomRepository.findDormitoryId(newRoom.getId()));
             return foundRoom;
         }
         else{
@@ -60,6 +60,6 @@ public class RoomService{
         roomRepository.deleteById(roomId);
         Optional<Room> room =roomRepository.findById(roomId);
         Room foundRoom = room.get();
-        dormitoryService.getCapacity(foundRoom.getDormitoryId());
+        dormitoryService.getCapacity(roomRepository.findDormitoryId(roomId));
     }
 }

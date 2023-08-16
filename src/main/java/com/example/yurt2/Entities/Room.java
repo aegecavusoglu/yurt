@@ -8,7 +8,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity
 @Table(name="room")
 
-public class Room extends RoomClassification{
+public class Room {
     @Id
     @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
