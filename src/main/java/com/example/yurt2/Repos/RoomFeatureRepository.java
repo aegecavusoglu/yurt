@@ -7,4 +7,6 @@ import java.util.Optional;
 
 public interface RoomFeatureRepository extends JpaRepository<RoomFeature,Long> {
     Optional<RoomFeature> findByRoomId(Long roomId);
+
+    void deleteByRoomId(Long roomId);
 }

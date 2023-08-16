@@ -12,7 +12,8 @@ import java.util.Optional;
 public class RoomFeatureService {
     RoomFeatureRepository roomFeatureRepository;
     public RoomFeatureService(RoomFeatureRepository roomFeatureRepository)
-    {this.roomFeatureRepository=roomFeatureRepository;}
+    {
+        this.roomFeatureRepository=roomFeatureRepository;}
 
     public List<RoomFeature> getAllRoomFeature(){
         return roomFeatureRepository.findAll();
@@ -38,6 +39,9 @@ public class RoomFeatureService {
         else{
             return null;
         }
+    }
+    public void deleteRoomFeatureById(Long roomId){
+        roomFeatureRepository.deleteByRoomId(roomId);
     }
 
 }

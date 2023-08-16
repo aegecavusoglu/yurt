@@ -2,19 +2,24 @@ package com.example.yurt2.Services;
 
 import com.example.yurt2.Entities.Dormitory;
 import com.example.yurt2.Entities.Room;
+import com.example.yurt2.Entities.RoomFeature;
 import com.example.yurt2.Repos.RoomRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
 
-public class RoomService {
+public class RoomService{
     RoomRepository roomRepository;
+    DormitoryService dormitoryService;
 
-    public RoomService(RoomRepository roomRepository) {
+    public RoomService(RoomRepository roomRepository,DormitoryService dormitoryService )
+    {
         this.roomRepository = roomRepository;
+        this.dormitoryService = dormitoryService;
     }
 
 
@@ -30,8 +35,9 @@ public class RoomService {
     }
 
     public Room createOneRoom(Room newRoom) {
-        return roomRepository.save(newRoom);
-
+        roomRepository.save(newRoom);
+        dormitoryService.getCapacity(newRoom.getDormitoryId());
+        return newRoom;
     }
 
     public Room updateOneRoom(Long roomNumber, Room newRoom) {
@@ -41,6 +47,7 @@ public class RoomService {
             foundRoom.setRoomNumber(newRoom.getRoomNumber());
             foundRoom.setRoomClassificationId(newRoom.getRoomClassificationId());
             roomRepository.save(foundRoom);
+            dormitoryService.getCapacity(foundRoom.getDormitoryId());
             return foundRoom;
         }
         else{
@@ -48,7 +55,11 @@ public class RoomService {
         }
     }
 
-    public void deleteById(Long roomId) {
+    public void deleteById(Long roomId)
+    {
         roomRepository.deleteById(roomId);
+        Optional<Room> room =roomRepository.findById(roomId);
+        Room foundRoom = room.get();
+        dormitoryService.getCapacity(foundRoom.getDormitoryId());
     }
 }

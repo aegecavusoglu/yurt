@@ -40,7 +40,7 @@ public class RoomClassification {
         this.roomType = roomType;
     }
 
-    public int getDormitoryId() {
+    public long getDormitoryId() {
         return dormitoryId;
     }
 

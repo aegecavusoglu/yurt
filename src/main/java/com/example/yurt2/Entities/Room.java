@@ -2,24 +2,19 @@ package com.example.yurt2.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name="room")
 
-public class Room {
+public class Room extends RoomClassification{
     @Id
     @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name="room_number")
     private int roomNumber;
-    @Getter
     @Column(name="room_classification_id")
     private int roomClassificationId;
 

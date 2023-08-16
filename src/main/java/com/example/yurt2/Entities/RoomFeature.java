@@ -1,40 +1,31 @@
 package com.example.yurt2.Entities;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Getter;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "room_features")
 
-public class RoomFeature {
-    @Getter
+public class RoomFeature extends Room{
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Getter
     @Column(name = "room_id")
     private Long roomId;
-    @Getter
     @Column(name = "room_type")
     private int roomType;
-    @Getter
     @Column(name = "instant_room_capacity")
     private int instantRoomCapacity;
     @Column(name = "is_full")
     private boolean isFull;
-    @Getter
     @Column(name = "price")
     private int price;
 
-    public RoomFeature(Long id, Long roomId, int roomType, int instantRoomCapacity, boolean isFull, int price) {
+    public RoomFeature(Long id, Long roomId) {
         this.id = id;
         this.roomId = roomId;
-        this.roomType = roomType;
-        this.instantRoomCapacity = instantRoomCapacity;
-        this.isFull = isFull;
-        this.price = price;
+        this.roomType = getRoomType();
+        this.isFull = false;
+        this.price = getPrice();
     }
     public RoomFeature(){}
 
@@ -44,10 +35,6 @@ public class RoomFeature {
 
     public void setRoomId(Long roomId) {
         this.roomId = roomId;
-    }
-
-    public void setRoomType(int roomType) {
-        this.roomType = roomType;
     }
 
     public void setInstantRoomCapacity(int instantRoomCapacity) {
@@ -61,11 +48,6 @@ public class RoomFeature {
     public void setFull(boolean full) {
         isFull = full;
     }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
     public Long getId() {
         return id;
     }
@@ -74,15 +56,7 @@ public class RoomFeature {
         return roomId;
     }
 
-    public int getRoomType() {
-        return roomType;
-    }
-
     public int getInstantRoomCapacity() {
         return instantRoomCapacity;
-    }
-
-    public int getPrice() {
-        return price;
     }
 }
