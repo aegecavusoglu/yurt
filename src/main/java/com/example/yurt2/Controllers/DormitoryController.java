@@ -30,7 +30,7 @@ public class DormitoryController {
     public Dormitory createOneDormitory(@RequestBody Dormitory new_dormitory){
         return dormitoryEntityService.createOneDormitory(new_dormitory);
     }
-    @PutMapping("/{dormitory_id}")
+    @PutMapping("/update/{dormitory_id}")
     public Dormitory updateOneDormitory(@PathVariable Long dormitory_id,@RequestBody Dormitory new_dormitory){
         return dormitoryEntityService.updateOneDormitory(dormitory_id,new_dormitory);
     }
