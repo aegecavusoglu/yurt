@@ -10,14 +10,14 @@ import java.util.Optional;
 
 @Service
 
-public class DormitoryService {
+public class DormitoryEntityService {
     private DormitoryRepository dormitory_repository;
-    private RoomFeatureService roomFeatureService;
+    private RoomFeatureEntityService roomFeatureEntityService;
 
 
-    public DormitoryService(DormitoryRepository dormitoryRepository,RoomFeatureService roomFeatureService) {
+    public DormitoryEntityService(DormitoryRepository dormitoryRepository, RoomFeatureEntityService roomFeatureEntityService) {
         this.dormitory_repository = dormitoryRepository;
-        this.roomFeatureService = roomFeatureService;
+        this.roomFeatureEntityService = roomFeatureEntityService;
     }
     public List<Dormitory> getAllDormitories() {
         return dormitory_repository.findAll();
@@ -60,7 +60,7 @@ public class DormitoryService {
     }
 
     public int getCapacity(Long dormitoryId) {
-        List<RoomFeature> roomFeatures = roomFeatureService.getAllRoomFeature();
+        List<RoomFeature> roomFeatures = roomFeatureEntityService.getAllRoomFeature();
         int capacity = 0;
         for (int i=0; i<roomFeatures.size();i++){
             capacity =capacity+roomFeatures.get(i).getRoomType();

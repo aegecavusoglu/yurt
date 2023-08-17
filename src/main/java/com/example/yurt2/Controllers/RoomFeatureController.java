@@ -1,7 +1,7 @@
 package com.example.yurt2.Controllers;
 
 import com.example.yurt2.Entities.RoomFeature;
-import com.example.yurt2.Services.RoomFeatureService;
+import com.example.yurt2.Services.RoomFeatureEntityService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,24 +9,24 @@ import java.util.List;
 @RestController
 @RequestMapping("/roomfeature")
 public class RoomFeatureController {
-    RoomFeatureService roomFeatureService;
+    RoomFeatureEntityService roomFeatureEntityService;
 
-    public RoomFeatureController(RoomFeatureService roomFeatureService) {
-        this.roomFeatureService = roomFeatureService;
+    public RoomFeatureController(RoomFeatureEntityService roomFeatureEntityService) {
+        this.roomFeatureEntityService = roomFeatureEntityService;
     }
     @PostMapping("/create")
     public RoomFeature createRoomFeature(@RequestBody RoomFeature roomFeature)
-    {return roomFeatureService.createOneRoomFeature(roomFeature);}
+    {return roomFeatureEntityService.createOneRoomFeature(roomFeature);}
 
     @GetMapping
     public List<RoomFeature> getAllRoomFeature()
-    {return roomFeatureService.getAllRoomFeature();}
+    {return roomFeatureEntityService.getAllRoomFeature();}
     @GetMapping("/{roomId}")
     public RoomFeature getOneRoomFeatureByRoomId(@PathVariable Long roomId)
-    {return roomFeatureService.getOneRoomFeatureByRoomId(roomId);}
+    {return roomFeatureEntityService.getOneRoomFeatureByRoomId(roomId);}
     @PutMapping("/update/{roomId}")
     public RoomFeature updateOneRoomFeature(@PathVariable Long roomId,@RequestBody RoomFeature roomFeature)
     {
-        return roomFeatureService.updateOneRoomFeature(roomId,roomFeature);
+        return roomFeatureEntityService.updateOneRoomFeature(roomId,roomFeature);
     }
 }

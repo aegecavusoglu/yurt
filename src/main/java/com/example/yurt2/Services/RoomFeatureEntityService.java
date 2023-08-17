@@ -1,6 +1,5 @@
 package com.example.yurt2.Services;
 
-import com.example.yurt2.Entities.Room;
 import com.example.yurt2.Entities.RoomFeature;
 import com.example.yurt2.Repos.RoomFeatureRepository;
 import org.springframework.stereotype.Service;
@@ -9,9 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class RoomFeatureService {
+public class RoomFeatureEntityService {
     RoomFeatureRepository roomFeatureRepository;
-    public RoomFeatureService(RoomFeatureRepository roomFeatureRepository)
+    public RoomFeatureEntityService(RoomFeatureRepository roomFeatureRepository)
     {
         this.roomFeatureRepository=roomFeatureRepository;}
 

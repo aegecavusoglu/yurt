@@ -1,6 +1,5 @@
 package com.example.yurt2.Services;
 
-import com.example.yurt2.Entities.Room;
 import com.example.yurt2.Entities.StudentContract;
 import com.example.yurt2.Repos.StudentContractRepository;
 import org.springframework.stereotype.Service;
@@ -10,10 +9,10 @@ import java.util.Optional;
 
 @Service
 
-public class StudentContractService {
+public class StudentContractEntityService {
     StudentContractRepository studentContractRepository;
 
-    public StudentContractService(StudentContractRepository studentContractRepository) {
+    public StudentContractEntityService(StudentContractRepository studentContractRepository) {
         this.studentContractRepository = studentContractRepository;
     }
 

@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AddressService {
+public class AddressEntityService {
     AddressRepository addressRepository;
 
-    public AddressService(AddressRepository addressRepository) {
+    public AddressEntityService(AddressRepository addressRepository) {
         this.addressRepository = addressRepository;
     }
 

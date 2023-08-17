@@ -1,6 +1,5 @@
 package com.example.yurt2.Services;
 
-import com.example.yurt2.Entities.Room;
 import com.example.yurt2.Entities.RoomClassification;
 import com.example.yurt2.Repos.RoomClassificationRepository;
 import org.springframework.stereotype.Service;
@@ -10,10 +9,10 @@ import java.util.Optional;
 
 @Service
 
-public class RoomClassificationService {
+public class RoomClassificationEntityService {
     RoomClassificationRepository roomClassificationRepository;
 
-    public RoomClassificationService(RoomClassificationRepository roomClassificationRepository) {
+    public RoomClassificationEntityService(RoomClassificationRepository roomClassificationRepository) {
         this.roomClassificationRepository = roomClassificationRepository;
     }
 

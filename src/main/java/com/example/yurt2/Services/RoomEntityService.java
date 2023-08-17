@@ -1,8 +1,6 @@
 package com.example.yurt2.Services;
 
-import com.example.yurt2.Entities.Dormitory;
 import com.example.yurt2.Entities.Room;
-import com.example.yurt2.Entities.RoomFeature;
 import com.example.yurt2.Repos.RoomRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +10,14 @@ import java.util.Optional;
 
 @Service
 
-public class RoomService{
+public class RoomEntityService {
     RoomRepository roomRepository;
-    DormitoryService dormitoryService;
+    DormitoryEntityService dormitoryEntityService;
 
-    public RoomService(RoomRepository roomRepository,DormitoryService dormitoryService )
+    public RoomEntityService(RoomRepository roomRepository, DormitoryEntityService dormitoryEntityService)
     {
         this.roomRepository = roomRepository;
-        this.dormitoryService = dormitoryService;
+        this.dormitoryEntityService = dormitoryEntityService;
     }
 
 
@@ -35,9 +33,9 @@ public class RoomService{
     }
 
     public Room createOneRoom(Room newRoom) {
-        roomRepository.save(newRoom);
-        dormitoryService.getCapacity(roomRepository.findDormitoryId(newRoom.getId()));
-        return newRoom;
+         var x = roomRepository.save(newRoom);
+         dormitoryEntityService.getCapacity(roomRepository.findDormitoryId(newRoom.getId()));
+         return x;
     }
 
     public Room updateOneRoom(Long roomNumber, Room newRoom) {
@@ -47,7 +45,7 @@ public class RoomService{
             foundRoom.setRoomNumber(newRoom.getRoomNumber());
             foundRoom.setRoomClassificationId(newRoom.getRoomClassificationId());
             roomRepository.save(foundRoom);
-            dormitoryService.getCapacity(roomRepository.findDormitoryId(newRoom.getId()));
+            dormitoryEntityService.getCapacity(roomRepository.findDormitoryId(newRoom.getId()));
             return foundRoom;
         }
         else{
@@ -60,6 +58,6 @@ public class RoomService{
         roomRepository.deleteById(roomId);
         Optional<Room> room =roomRepository.findById(roomId);
         Room foundRoom = room.get();
-        dormitoryService.getCapacity(roomRepository.findDormitoryId(roomId));
+        dormitoryEntityService.getCapacity(roomRepository.findDormitoryId(roomId));
     }
 }

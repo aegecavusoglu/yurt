@@ -1,8 +1,7 @@
 package com.example.yurt2.Controllers;
 
-import com.example.yurt2.Entities.Room;
 import com.example.yurt2.Entities.StudentContract;
-import com.example.yurt2.Services.StudentContractService;
+import com.example.yurt2.Services.StudentContractEntityService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,30 +10,30 @@ import java.util.List;
 @RequestMapping("/contracts")
 
 public class StudentContractController {
-    StudentContractService studentContractService;
+    StudentContractEntityService studentContractEntityService;
 
-    public StudentContractController(StudentContractService studentContractService) {
-        this.studentContractService = studentContractService;
+    public StudentContractController(StudentContractEntityService studentContractEntityService) {
+        this.studentContractEntityService = studentContractEntityService;
     }
     @GetMapping
     public List<StudentContract> getAllContracts(){
-        return studentContractService.getAllContracts();
+        return studentContractEntityService.getAllContracts();
     }
     @GetMapping("/{studentId}")
     public StudentContract getOneContract(@PathVariable Long studentId){
-        return studentContractService.getOneContractByStudentId(studentId);
+        return studentContractEntityService.getOneContractByStudentId(studentId);
     }
     @PostMapping("/{create}")
     public StudentContract createOneContract(@RequestBody StudentContract newStudentContract){
-        return studentContractService.createOneContract(newStudentContract);
+        return studentContractEntityService.createOneContract(newStudentContract);
     }
     @PutMapping("/update/{studentId}")
     public StudentContract updateOneContract(@PathVariable Long studentId, @RequestBody StudentContract newStudentContract) {
-        return studentContractService.updateOneContract(studentId, newStudentContract);
+        return studentContractEntityService.updateOneContract(studentId, newStudentContract);
     }
     @DeleteMapping("/delete/{studentId}")
     public void deleteOneContract(@PathVariable Long studentId){
-        studentContractService.deleteById(studentId);
+        studentContractEntityService.deleteById(studentId);
     }
 
 

@@ -1,6 +1,5 @@
 package com.example.yurt2.Services;
 
-import com.example.yurt2.Entities.Dormitory;
 import com.example.yurt2.Entities.Student;
 import com.example.yurt2.Repos.StudentRepository;
 import org.springframework.stereotype.Service;
@@ -9,9 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class StudentService {
+public class StudentEntityService {
     private StudentRepository studentRepository;
-    public StudentService(StudentRepository studentRepository){
+    public StudentEntityService(StudentRepository studentRepository){
         this.studentRepository=studentRepository;
     }
     public List<Student> getAllStudents(){return studentRepository.findAll();}

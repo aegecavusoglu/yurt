@@ -1,44 +1,43 @@
 package com.example.yurt2.Controllers;
 
 import com.example.yurt2.Entities.Dormitory;
-import com.example.yurt2.Services.DormitoryService;
+import com.example.yurt2.Services.DormitoryEntityService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/dormitory")
 public class DormitoryController {
-    DormitoryService dormitoryService;
+    DormitoryEntityService dormitoryEntityService;
 
-    public DormitoryController(DormitoryService dormitoryService) {
-        this.dormitoryService = dormitoryService;
+    public DormitoryController(DormitoryEntityService dormitoryEntityService) {
+        this.dormitoryEntityService = dormitoryEntityService;
     }
     @GetMapping
     public List<Dormitory> getAllDormitories(){
-        return dormitoryService.getAllDormitories();
+        return dormitoryEntityService.getAllDormitories();
     }
     @GetMapping("/{dormitoryId}")
     public Dormitory getOneDormitory(@PathVariable Long dormitoryId){
-        return dormitoryService.getOneDormitory(dormitoryId);
+        return dormitoryEntityService.getOneDormitory(dormitoryId);
     }
     @GetMapping("/capacity/{dormitoryId}")
     public int getCapacity(@PathVariable Long dormitoryId){
-        return dormitoryService.getCapacity(dormitoryId);
+        return dormitoryEntityService.getCapacity(dormitoryId);
     }
     @PostMapping("/create")
     public Dormitory createOneDormitory(@RequestBody Dormitory new_dormitory){
-        return dormitoryService.createOneDormitory(new_dormitory);
+        return dormitoryEntityService.createOneDormitory(new_dormitory);
     }
     @PutMapping("/{dormitory_id}")
     public Dormitory updateOneDormitory(@PathVariable Long dormitory_id,@RequestBody Dormitory new_dormitory){
-        return dormitoryService.updateOneDormitory(dormitory_id,new_dormitory);
+        return dormitoryEntityService.updateOneDormitory(dormitory_id,new_dormitory);
     }
 
     @DeleteMapping("/{dormitory_id}")
     public void deleteOneDormitory(@PathVariable Long dormitory_id){
-        dormitoryService.deleteById(dormitory_id);
+        dormitoryEntityService.deleteById(dormitory_id);
     }
 
 
