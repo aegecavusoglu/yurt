@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 
 public class StudentRoomRelationEntityService {
     StudentRoomRelationRepository studentRoomRelationRepository;
-    RoomService roomService;
+    RoomEntityService roomEntityService;
 
-    public StudentRoomRelationEntityService(StudentRoomRelationRepository studentRoomRelationRepository, RoomService roomService) {
+    public StudentRoomRelationEntityService(StudentRoomRelationRepository studentRoomRelationRepository, RoomEntityService roomEntityService) {
         this.studentRoomRelationRepository = studentRoomRelationRepository;
-        this.roomService = roomService;
+        this.roomEntityService = roomEntityService;
     }
 
     public StudentRoomRelation getOneStudentRoomRelationById(Long studentId) {
