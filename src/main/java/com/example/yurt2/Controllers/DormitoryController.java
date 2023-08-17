@@ -2,6 +2,7 @@ package com.example.yurt2.Controllers;
 
 import com.example.yurt2.Entities.Dormitory;
 import com.example.yurt2.Services.DormitoryEntityService;
+import com.example.yurt2.Services.DormitoryService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,9 +11,11 @@ import java.util.List;
 @RequestMapping("/dormitory")
 public class DormitoryController {
     DormitoryEntityService dormitoryEntityService;
+    DormitoryService dormitoryService;
 
-    public DormitoryController(DormitoryEntityService dormitoryEntityService) {
+    public DormitoryController(DormitoryEntityService dormitoryEntityService,DormitoryService dormitoryService) {
         this.dormitoryEntityService = dormitoryEntityService;
+        this.dormitoryService = dormitoryService;
     }
     @GetMapping
     public List<Dormitory> getAllDormitories(){
@@ -24,7 +27,7 @@ public class DormitoryController {
     }
     @GetMapping("/capacity/{dormitoryId}")
     public int getCapacity(@PathVariable Long dormitoryId){
-        return dormitoryEntityService.getCapacity(dormitoryId);
+        return dormitoryService.getCapacity(dormitoryId);
     }
     @PostMapping("/create")
     public Dormitory createOneDormitory(@RequestBody Dormitory new_dormitory){

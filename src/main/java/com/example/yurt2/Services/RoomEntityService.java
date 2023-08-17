@@ -12,12 +12,12 @@ import java.util.Optional;
 
 public class RoomEntityService {
     RoomRepository roomRepository;
-    DormitoryEntityService dormitoryEntityService;
+    DormitoryService dormitoryService;
 
-    public RoomEntityService(RoomRepository roomRepository, DormitoryEntityService dormitoryEntityService)
+    public RoomEntityService(RoomRepository roomRepository, DormitoryService dormitoryService)
     {
         this.roomRepository = roomRepository;
-        this.dormitoryEntityService = dormitoryEntityService;
+        this.dormitoryService = dormitoryService;
     }
 
 
@@ -34,7 +34,7 @@ public class RoomEntityService {
 
     public Room createOneRoom(Room newRoom) {
          var x = roomRepository.save(newRoom);
-         dormitoryEntityService.getCapacity(roomRepository.findDormitoryId(newRoom.getId()));
+         dormitoryService.getCapacity(roomRepository.findDormitoryId(newRoom.getId()));
          return x;
     }
 
@@ -45,7 +45,7 @@ public class RoomEntityService {
             foundRoom.setRoomNumber(newRoom.getRoomNumber());
             foundRoom.setRoomClassificationId(newRoom.getRoomClassificationId());
             roomRepository.save(foundRoom);
-            dormitoryEntityService.getCapacity(roomRepository.findDormitoryId(newRoom.getId()));
+            dormitoryService.getCapacity(roomRepository.findDormitoryId(newRoom.getId()));
             return foundRoom;
         }
         else{
@@ -58,6 +58,6 @@ public class RoomEntityService {
         roomRepository.deleteById(roomId);
         Optional<Room> room =roomRepository.findById(roomId);
         Room foundRoom = room.get();
-        dormitoryEntityService.getCapacity(roomRepository.findDormitoryId(roomId));
+        dormitoryService.getCapacity(roomRepository.findDormitoryId(roomId));
     }
 }

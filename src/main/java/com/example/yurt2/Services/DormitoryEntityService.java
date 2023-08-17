@@ -59,13 +59,4 @@ public class DormitoryEntityService {
         dormitory_repository.deleteById(dormitory_id);
     }
 
-    public int getCapacity(Long dormitoryId) {
-        List<RoomFeature> roomFeatures = roomFeatureEntityService.getAllRoomFeature();
-        int capacity = 0;
-        for (int i=0; i<roomFeatures.size();i++){
-            capacity =capacity+roomFeatures.get(i).getRoomType();
-        }
-        updateGeneralCapacity(capacity,dormitoryId);
-        return  capacity;
-    }
 }
