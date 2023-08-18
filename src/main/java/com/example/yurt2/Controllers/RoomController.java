@@ -1,7 +1,7 @@
 package com.example.yurt2.Controllers;
 
 import com.example.yurt2.Entities.Room;
-import com.example.yurt2.Services.RoomEntityService;
+import com.example.yurt2.Services.RoomService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,33 +9,33 @@ import java.util.List;
 @RestController
 @RequestMapping("/room")
 public class RoomController {
-    RoomEntityService roomEntityService;
+    RoomService roomService;
 
-    public RoomController(RoomEntityService roomEntityService) {
-        this.roomEntityService = roomEntityService;
+    public RoomController(RoomService roomService) {
+        this.roomService = roomService;
     }
     @GetMapping
     public List<Room> getAllRooms(){
-        return roomEntityService.getAllRooms();
+        return roomService.getAllRooms();
     }
 
     @GetMapping("/{roomNumber}")
     public Room getOneRoom(@PathVariable Long roomNumber){
-        return roomEntityService.getOneRoomByRoomNumber(roomNumber);
+        return roomService.getOneRoomByRoomNumber(roomNumber);
     }
 
     @PostMapping("/create")
-    public Room createOneRoom(@RequestBody Room newRoom){
-        return roomEntityService.createOneRoom(newRoom);
+    public Room createRoom(@RequestBody Room newRoom){
+        return roomService.createRoomAndUpdateCapacity(newRoom);
     }
 
     @PutMapping("/update/{roomNumber}")
     public Room updateOneRoom(@PathVariable Long roomNumber, @RequestBody Room newRoom) {
-        return roomEntityService.updateOneRoom(roomNumber, newRoom);
+        return roomService.updateRoom(roomNumber, newRoom);
     }
     @DeleteMapping("/delete/{roomId}")
     public void deleteOneRoom(@PathVariable Long roomId){
-        roomEntityService.deleteById(roomId);
+        roomService.deleteById(roomId);
     }
 
 

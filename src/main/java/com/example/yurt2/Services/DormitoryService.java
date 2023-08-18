@@ -17,12 +17,14 @@ public class DormitoryService {
     }
 
     public int getCapacity(Long dormitoryId) {
+        return dormitoryEntityService.getOneDormitory(dormitoryId).getGeneral_capacity();
+    }
+    public void updateGeneralCapacity(Long dormitoryId){
         List<RoomFeature> roomFeatures = roomFeatureEntityService.getAllRoomFeature();
         int capacity = 0;
         for (int i=0; i<roomFeatures.size();i++){
             capacity =capacity+roomFeatures.get(i).getRoomType();
         }
         dormitoryEntityService.updateGeneralCapacity(capacity,dormitoryId);
-        return  capacity;
     }
 }

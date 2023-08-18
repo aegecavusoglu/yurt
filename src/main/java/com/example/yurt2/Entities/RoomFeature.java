@@ -1,8 +1,5 @@
 package com.example.yurt2.Entities;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "room_features")
@@ -10,6 +7,7 @@ import jakarta.persistence.Table;
 public class RoomFeature {
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "room_id")
     private Long roomId;

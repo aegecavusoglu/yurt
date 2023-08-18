@@ -16,10 +16,10 @@ public class Room {
     @Column(name="room_number")
     private int roomNumber;
     @Column(name="room_classification_id")
-    private int roomClassificationId;
+    private Long roomClassificationId;
 
 
-    public Room(Long id, int roomNumber, int roomClassificationId) {
+    public Room(Long id, int roomNumber, Long roomClassificationId) {
         this.id = id;
         this.roomNumber = roomNumber;
         this.roomClassificationId = roomClassificationId;
@@ -43,11 +43,11 @@ public class Room {
         this.roomNumber = roomNumber;
     }
 
-    public void setRoomClassificationId(int roomClassificationId) {
+    public void setRoomClassificationId(Long roomClassificationId) {
         this.roomClassificationId = roomClassificationId;
     }
 
-    public int getRoomClassificationId() {
+    public Long getRoomClassificationId() {
         return roomClassificationId;
     }
 }

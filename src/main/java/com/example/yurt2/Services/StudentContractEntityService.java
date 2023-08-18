@@ -47,4 +47,7 @@ public class StudentContractEntityService {
     public void deleteById(Long identityNumber) {
         studentContractRepository.deleteById(identityNumber);
     }
+    public int findActiveStudentsNumberByRoomId(Long roomId){
+        return studentContractRepository.findActiveStudentsNumberByRoomId(roomId);
+    }
 }

@@ -33,9 +33,7 @@ public class RoomEntityService {
     }
 
     public Room createOneRoom(Room newRoom) {
-         var x = roomRepository.save(newRoom);
-         dormitoryService.getCapacity(roomRepository.findDormitoryId(newRoom.getId()));
-         return x;
+         return roomRepository.save(newRoom);
     }
 
     public Room updateOneRoom(Long roomNumber, Room newRoom) {
@@ -45,7 +43,6 @@ public class RoomEntityService {
             foundRoom.setRoomNumber(newRoom.getRoomNumber());
             foundRoom.setRoomClassificationId(newRoom.getRoomClassificationId());
             roomRepository.save(foundRoom);
-            dormitoryService.getCapacity(roomRepository.findDormitoryId(newRoom.getId()));
             return foundRoom;
         }
         else{
@@ -56,8 +53,8 @@ public class RoomEntityService {
     public void deleteById(Long roomId)
     {
         roomRepository.deleteById(roomId);
-        Optional<Room> room =roomRepository.findById(roomId);
-        Room foundRoom = room.get();
-        dormitoryService.getCapacity(roomRepository.findDormitoryId(roomId));
+    }
+    public Long findDormitoryId(Long roomId){
+        return roomRepository.findDormitoryId(roomId);
     }
 }

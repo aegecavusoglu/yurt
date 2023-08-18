@@ -23,6 +23,9 @@ public class RoomClassificationEntityService {
     public RoomClassification getOneRoomType(Long roomType) {
         return roomClassificationRepository.findByRoomType(roomType).orElse(null);
     }
+    public Optional<RoomClassification> getOneRoomClassification(Long roomClassificationId){
+        return roomClassificationRepository.findById(roomClassificationId);
+    }
 
     public RoomClassification createOneRoomClassification(RoomClassification newRoomClassification) {
         return roomClassificationRepository.save(newRoomClassification);
