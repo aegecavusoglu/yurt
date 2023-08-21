@@ -6,6 +6,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
 
+import java.util.List;
+
+import java.util.List;
+
 @Service
 public class RoomFeatureService {
     RoomFeatureEntityService roomFeatureEntityService;
@@ -61,5 +65,7 @@ public class RoomFeatureService {
         dormitoryService.updateGeneralCapacity(findDormitoryId(roomId));
     }
 
-
+    public List<RoomFeature> findTheMostCrowdedRoom() {
+        return roomFeatureEntityService.findTheMostCrowdedRoom();
+    }
 }

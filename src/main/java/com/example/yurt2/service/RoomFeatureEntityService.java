@@ -47,4 +47,8 @@ public class RoomFeatureEntityService {
         roomFeatureRepository.deleteByRoomId(roomId);
     }
 
+
+    public List<RoomFeature> findTheMostCrowdedRoom() {
+        return roomFeatureRepository.findTheMostCrowdedRoom();
+    }
 }

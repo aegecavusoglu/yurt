@@ -2,6 +2,7 @@ package com.example.yurt2.controller;
 
 import com.example.yurt2.entity.RoomFeature;
 import com.example.yurt2.service.RoomFeatureEntityService;
+import com.example.yurt2.service.RoomFeatureService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,9 +11,11 @@ import java.util.List;
 @RequestMapping("/roomfeature")
 public class RoomFeatureController {
     RoomFeatureEntityService roomFeatureEntityService;
+    RoomFeatureService roomFeatureService;
 
-    public RoomFeatureController(RoomFeatureEntityService roomFeatureEntityService) {
+    public RoomFeatureController(RoomFeatureEntityService roomFeatureEntityService,RoomFeatureService roomFeatureService) {
         this.roomFeatureEntityService = roomFeatureEntityService;
+        this.roomFeatureService=roomFeatureService;
     }
     @PostMapping("/create")
     public RoomFeature createRoomFeature(@RequestBody RoomFeature roomFeature)
@@ -28,5 +31,9 @@ public class RoomFeatureController {
     public RoomFeature updateOneRoomFeature(@PathVariable Long roomId,@RequestBody RoomFeature roomFeature)
     {
         return roomFeatureEntityService.updateOneRoomFeature(roomId,roomFeature);
+    }
+    @GetMapping("/mostcrowdedroom")
+    public List<RoomFeature> findTheMostCrowdedRoom(){
+        return roomFeatureService.findTheMostCrowdedRoom();
     }
 }

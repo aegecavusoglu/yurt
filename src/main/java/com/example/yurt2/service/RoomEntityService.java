@@ -25,6 +25,7 @@ public class RoomEntityService {
 
         return roomRepository.findAll();
 
+
     }
 
     public Room getOneRoomByRoomNumber(Long roomNumber) {

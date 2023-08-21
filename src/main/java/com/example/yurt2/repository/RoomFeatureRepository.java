@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface RoomFeatureRepository extends JpaRepository<RoomFeature,Long> {
@@ -13,4 +14,11 @@ public interface RoomFeatureRepository extends JpaRepository<RoomFeature,Long> {
     void deleteByRoomId(Long roomId);
     @Query("select r.dormitoryId from Room r where r.id=:roomId")
     Long findDormitoryId(@Param("roomId") Long roomId);
+
+
+
+    @Query("SELECT roomId\n" +
+            "FROM RoomFeature\n" +
+            "WHERE instantRoomCapacity = (SELECT MAX(instantRoomCapacity) FROM RoomFeature)\n")
+    List<RoomFeature> findTheMostCrowdedRoom();
 }
