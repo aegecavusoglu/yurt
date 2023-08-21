@@ -19,7 +19,7 @@ public class RoomFeatureController {
     }
     @PostMapping("/create")
     public RoomFeature createRoomFeature(@RequestBody RoomFeature roomFeature)
-    {return roomFeatureEntityService.createOneRoomFeature(roomFeature);}
+    {return roomFeatureService.createRoomFeatureAndUpdateCapacity(roomFeature);}
 
     @GetMapping
     public List<RoomFeature> getAllRoomFeature()

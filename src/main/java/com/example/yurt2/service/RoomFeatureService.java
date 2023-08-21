@@ -24,12 +24,10 @@ public class RoomFeatureService {
         this.dormitoryService = dormitoryService;
     }
 
-    public RoomFeature createRoomFeature(RoomFeature roomFeature){
-        return roomFeatureEntityService.createOneRoomFeature(createRoomFeatureInstance(roomFeature));
-    }
+
     public RoomFeature createRoomFeatureInstance(RoomFeature roomFeature){
         RoomFeature newRoomFeature = new RoomFeature();
-        newRoomFeature.setRoomId(roomFeature.getId());
+        newRoomFeature.setRoomId(roomFeature.getRoomId());
         newRoomFeature.setRoomType(roomFeature.getRoomType());
         newRoomFeature.setPrice(roomFeature.getPrice());
         newRoomFeature.setInstantRoomCapacity(studentContractEntityService.findActiveStudentsNumberByRoomId(roomFeature.getRoomId()));
@@ -38,7 +36,7 @@ public class RoomFeatureService {
     }
     public RoomFeature createRoomFeatureAndUpdateCapacity(RoomFeature newRoomFeature){
         var roomStatus = transactionTemplate.execute(p-> {
-            RoomFeature roomFeature = roomFeatureEntityService.createOneRoomFeature(newRoomFeature);
+            RoomFeature roomFeature = roomFeatureEntityService.createOneRoomFeature(createRoomFeatureInstance(newRoomFeature));
             dormitoryService.updateGeneralCapacity(findDormitoryId(newRoomFeature.getRoomId()));
             return roomFeature;
         });
