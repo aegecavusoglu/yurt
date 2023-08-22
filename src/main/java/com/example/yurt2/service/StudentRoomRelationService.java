@@ -1,7 +1,7 @@
 package com.example.yurt2.service;
 
+import com.example.yurt2.entity.Student;
 import com.example.yurt2.entity.StudentRoomRelation;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -12,10 +12,12 @@ import java.util.Optional;
 public class StudentRoomRelationService {
     StudentRoomRelationEntityService studentRoomRelationEntityService;
     RoomFeatureService roomFeatureService;
+    StudentService studentService;
 
-    public StudentRoomRelationService(StudentRoomRelationEntityService studentRoomRelationEntityService, RoomFeatureService roomFeatureService) {
+    public StudentRoomRelationService(StudentRoomRelationEntityService studentRoomRelationEntityService, RoomFeatureService roomFeatureService, StudentService studentService) {
         this.studentRoomRelationEntityService = studentRoomRelationEntityService;
         this.roomFeatureService = roomFeatureService;
+        this.studentService = studentService;
     }
 
     public StudentRoomRelation getOneStudentRoomRelationById(Long studentRoomRelationId) {
@@ -39,6 +41,13 @@ public class StudentRoomRelationService {
     }
 
     public List<StudentRoomRelation> getAllStudentRoomRelationByStudentIdentityNumber(String studentIdentityNumber) {
-        return studentRoomRelationEntityService.getAllStudentRoomRelationByStudentIdentityNumber(studentIdentityNumber);
+        return studentRoomRelationEntityService.getAllStudentRoomRelationByStudentId(findStudentIdByStudentIdentityNumber(studentIdentityNumber));
+    }
+    public Long findStudentIdByStudentIdentityNumber(String studentIdentityNumber){
+        Student student = studentService.getOneStudentByIdentityNumber(studentIdentityNumber).get();
+        return student.getId();
+    }
+    public List<StudentRoomRelation> getAllStudentRoomRelation(){
+        return studentRoomRelationEntityService.getAllStudentRoomRelation();
     }
 }

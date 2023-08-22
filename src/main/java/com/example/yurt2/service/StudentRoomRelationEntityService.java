@@ -29,7 +29,11 @@ public class StudentRoomRelationEntityService {
         return studentRoomRelationRepository.findActiveStudentRoomRelationIdByStudentId(studentId);
     }
 
-    public List<StudentRoomRelation> getAllStudentRoomRelationByStudentIdentityNumber(String studentIdentityNumber) {
-        return studentRoomRelationRepository.findByStudentId(studentRoomRelationRepository.findStudentIdByStudentIdentityNumber(studentIdentityNumber));
+    public List<StudentRoomRelation> getAllStudentRoomRelationByStudentId(Long studentId) {
+        return studentRoomRelationRepository.findAllByStudentId(studentId);
+    }
+
+    public List<StudentRoomRelation> getAllStudentRoomRelation() {
+        return studentRoomRelationRepository.findAll();
     }
 }

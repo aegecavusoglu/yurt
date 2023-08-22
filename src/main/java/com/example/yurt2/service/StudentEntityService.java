@@ -20,17 +20,20 @@ public class StudentEntityService {
     public Student createStudent(Student newStudent){
         return studentRepository.save(newStudent);
     }
+    public Optional<Student> getOneStudentByIdentityNumber(String identityNumber){
+        return studentRepository.findByIdentityNumber(identityNumber);
+    }
     public Student updateStudent(Long studentId,Student newStudent){
         Optional<Student> student = studentRepository.findById(studentId);
         if(student.isPresent()){
             Student foundStudent=student.get();
             foundStudent.setName(newStudent.getName());
             foundStudent.setSurname(newStudent.getSurname());
-            foundStudent.setSchool_name(newStudent.getSchool_name());
-            foundStudent.setAddress_id(newStudent.getAddress_id());
-            foundStudent.setFamily_number(newStudent.getFamily_number());
-            foundStudent.setPhone_number(newStudent.getPhone_number());
-            foundStudent.setIdentity_number(newStudent.getIdentity_number());
+            foundStudent.setSchoolName(newStudent.getSchoolName());
+            foundStudent.setAddressId(newStudent.getAddressId());
+            foundStudent.setFamilyNumber(newStudent.getFamilyNumber());
+            foundStudent.setPhoneNumber(newStudent.getPhoneNumber());
+            foundStudent.setIdentityNumber(newStudent.getIdentityNumber());
             studentRepository.save(foundStudent);
             return foundStudent;
         }

@@ -15,12 +15,16 @@ public class StudentRoomRelationController {
     public StudentRoomRelationController(StudentRoomRelationService studentRoomRelationService) {
         this.studentRoomRelationService = studentRoomRelationService;
     }
+    @GetMapping("/getAllRecords")
+    public List<StudentRoomRelation> getAllStudentRoomRelation(){
+        return studentRoomRelationService.getAllStudentRoomRelation();
+    }
 
     @GetMapping("/{studentRoomRelationId}")
     public StudentRoomRelation getOneStudentRoomRelation(@PathVariable Long studentRoomRelationId){
         return studentRoomRelationService.getOneStudentRoomRelationById(studentRoomRelationId);
     }
-    @GetMapping("/{studentIdentityNumber}")
+    @GetMapping("/getOneStudentRecords/{studentIdentityNumber}")
     public List<StudentRoomRelation> getAllStudentRoomRelationByStudentIdentityNumber(@PathVariable String studentIdentityNumber){
         return studentRoomRelationService.getAllStudentRoomRelationByStudentIdentityNumber(studentIdentityNumber);
     }

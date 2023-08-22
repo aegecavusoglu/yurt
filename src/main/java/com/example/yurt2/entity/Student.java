@@ -10,30 +10,31 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name="identity_number")
-    private String identity_number;
+    private String identityNumber;
     @Column(name="name")
     private String name;
     @Column(name="surname")
     private String surname;
     @Column(name="phone_number")
-    private String phone_number;
+    private String phoneNumber;
     @Column(name="family_number")
-    private String family_number;
+    private String familyNumber;
     @Column(name="address_id")
-    private Long address_id;
+    private Long addressId;
     @Column(name="school_name")
-    private String school_name;
+    private String schoolName;
 
-    public Student(Long id, String identity_number, String name, String surname, String phone_number, String family_number, Long address_id, String school_name) {
+    public Student(Long id, String identityNumber, String name, String surname, String phoneNumber, String familyNumber, Long addressId, String schoolName) {
         this.id = id;
-        this.identity_number = identity_number;
+        this.identityNumber = identityNumber;
         this.name = name;
         this.surname = surname;
-        this.phone_number = phone_number;
-        this.family_number = family_number;
-        this.address_id = address_id;
-        this.school_name = school_name;
+        this.phoneNumber = phoneNumber;
+        this.familyNumber = familyNumber;
+        this.addressId = addressId;
+        this.schoolName = schoolName;
     }
+
     public Student(){}
 
     public Long getId() {
@@ -44,12 +45,12 @@ public class Student {
         this.id = id;
     }
 
-    public String getIdentity_number() {
-        return identity_number;
+    public String getIdentityNumber() {
+        return identityNumber;
     }
 
-    public void setIdentity_number(String identity_number) {
-        this.identity_number = identity_number;
+    public void setIdentityNumber(String identityNumber) {
+        this.identityNumber = identityNumber;
     }
 
     public String getName() {
@@ -68,36 +69,35 @@ public class Student {
         this.surname = surname;
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getFamily_number() {
-        return family_number;
+    public String getFamilyNumber() {
+        return familyNumber;
     }
 
-    public void setFamily_number(String family_number) {
-        this.family_number = family_number;
+    public void setFamilyNumber(String familyNumber) {
+        this.familyNumber = familyNumber;
     }
 
-    public Long getAddress_id() {
-        return address_id;
+    public Long getAddressId() {
+        return addressId;
     }
 
-    public void setAddress_id(Long address_id) {
-        this.address_id = address_id;
+    public void setAddressId(Long addressId) {
+        this.addressId = addressId;
     }
 
-    public String getSchool_name() {
-        return school_name;
+    public String getSchoolName() {
+        return schoolName;
     }
 
-    public void setSchool_name(String school_name) {
-        this.school_name = school_name;
+    public void setSchoolName(String schoolName) {
+        this.schoolName = schoolName;
     }
-
 }
