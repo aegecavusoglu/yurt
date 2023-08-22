@@ -28,16 +28,21 @@ public class RoomFeatureEntityService {
         Optional<RoomFeature> roomFeature=roomFeatureRepository.findByRoomId((roomId));
         if(roomFeature.isPresent()){
             RoomFeature foundRoomFeature=roomFeature.get();
-            foundRoomFeature.setRoomId(newRoomFeature.getRoomId());
-            foundRoomFeature.setInstantRoomCapacity(newRoomFeature.getInstantRoomCapacity());
             foundRoomFeature.setRoomType(newRoomFeature.getRoomType());
-            foundRoomFeature.setFull(newRoomFeature.isFull());
             foundRoomFeature.setPrice(newRoomFeature.getPrice());
             roomFeatureRepository.save(foundRoomFeature);
             return foundRoomFeature;
         }
         else{
             return null;
+        }
+    }
+    public void updateInstanceRoomCapacity(Long roomId, int instanceRoomCapacity){
+        Optional<RoomFeature> roomFeature=roomFeatureRepository.findByRoomId((roomId));
+        if(roomFeature.isPresent()){
+            RoomFeature foundRoomFeature=roomFeature.get();
+            foundRoomFeature.setInstantRoomCapacity(instanceRoomCapacity);
+            roomFeatureRepository.save(foundRoomFeature);
         }
     }
     public Long findDormitoryId(Long roomId){
@@ -51,4 +56,5 @@ public class RoomFeatureEntityService {
     public List<RoomFeature> findTheMostCrowdedRoom() {
         return roomFeatureRepository.findTheMostCrowdedRoom();
     }
+
 }

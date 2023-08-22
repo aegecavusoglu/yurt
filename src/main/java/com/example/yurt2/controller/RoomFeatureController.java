@@ -10,12 +10,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/roomfeature")
 public class RoomFeatureController {
-    RoomFeatureEntityService roomFeatureEntityService;
     RoomFeatureService roomFeatureService;
 
-    public RoomFeatureController(RoomFeatureEntityService roomFeatureEntityService,RoomFeatureService roomFeatureService) {
-        this.roomFeatureEntityService = roomFeatureEntityService;
-        this.roomFeatureService=roomFeatureService;
+    public RoomFeatureController(RoomFeatureService roomFeatureService) {
+        this.roomFeatureService = roomFeatureService;
     }
     @PostMapping("/create")
     public RoomFeature createRoomFeature(@RequestBody RoomFeature roomFeature)
@@ -23,14 +21,14 @@ public class RoomFeatureController {
 
     @GetMapping
     public List<RoomFeature> getAllRoomFeature()
-    {return roomFeatureEntityService.getAllRoomFeature();}
+    {return roomFeatureService.getAllRoomFeature();}
     @GetMapping("/{roomId}")
     public RoomFeature getOneRoomFeatureByRoomId(@PathVariable Long roomId)
-    {return roomFeatureEntityService.getOneRoomFeatureByRoomId(roomId);}
+    {return roomFeatureService.getOneRoomFeatureByRoomId(roomId);}
     @PutMapping("/update/{roomId}")
     public RoomFeature updateOneRoomFeature(@PathVariable Long roomId,@RequestBody RoomFeature roomFeature)
     {
-        return roomFeatureEntityService.updateOneRoomFeature(roomId,roomFeature);
+        return roomFeatureService.updateOneRoomFeature(roomId,roomFeature);
     }
     @GetMapping("/mostcrowdedroom")
     public List<RoomFeature> findTheMostCrowdedRoom(){

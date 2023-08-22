@@ -1,26 +1,26 @@
 package com.example.yurt2.controller;
 
 import com.example.yurt2.entity.StudentRoomRelation;
-import com.example.yurt2.service.StudentRoomRelationEntityService;
+import com.example.yurt2.service.StudentRoomRelationService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("stundentroomrelation")
+@RequestMapping("/studentRoomRelation")
 public class StudentRoomRelationController {
-    StudentRoomRelationEntityService studentRoomRelationEntityService;
+    StudentRoomRelationService studentRoomRelationService;
 
 
-    public StudentRoomRelationController(StudentRoomRelationEntityService studentRoomRelationEntityService) {
-        this.studentRoomRelationEntityService = studentRoomRelationEntityService;
+    public StudentRoomRelationController(StudentRoomRelationService studentRoomRelationService) {
+        this.studentRoomRelationService = studentRoomRelationService;
     }
 
-    @GetMapping("/{studentId}")
-    public StudentRoomRelation getOneStudentRoomRelation(@PathVariable Long studentId){
-        return studentRoomRelationEntityService.getOneStudentRoomRelationById(studentId);
+    @GetMapping("/{studentRoomRelationId}")
+    public StudentRoomRelation getOneStudentRoomRelation(@PathVariable Long studentRoomRelationId){
+        return studentRoomRelationService.getOneStudentRoomRelationById(studentRoomRelationId);
     }
 
     @PostMapping("/create")
     public StudentRoomRelation createOneStudentRoomRelation(@RequestBody StudentRoomRelation newStudentRoomRelation){
-        return studentRoomRelationEntityService.createOneStudentRoomRelation(newStudentRoomRelation);}
+        return studentRoomRelationService.createOneStudentRoomRelation(newStudentRoomRelation);}
 
 }

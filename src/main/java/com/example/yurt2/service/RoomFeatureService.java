@@ -42,6 +42,13 @@ public class RoomFeatureService {
         });
         return roomStatus;
     }
+    public RoomFeature getOneRoomFeatureByRoomId(Long roomId) {
+        return roomFeatureEntityService.getOneRoomFeatureByRoomId(roomId);
+
+    }
+    public List<RoomFeature> getAllRoomFeature(){
+        return roomFeatureEntityService.getAllRoomFeature();
+    }
     public Long findDormitoryId(Long roomId){
         return roomFeatureEntityService.findDormitoryId(roomId);
     }
@@ -65,5 +72,13 @@ public class RoomFeatureService {
 
     public List<RoomFeature> findTheMostCrowdedRoom() {
         return roomFeatureEntityService.findTheMostCrowdedRoom();
+    }
+    public void increaseInstanceRoomCapacity(Long roomId){
+        int instanceRoomCapacity = roomFeatureEntityService.getOneRoomFeatureByRoomId(roomId).getInstantRoomCapacity()+1;
+        roomFeatureEntityService.updateInstanceRoomCapacity(roomId,instanceRoomCapacity);
+    }
+    public void decreaseInstanceRoomCapacity(Long roomId){
+        int instanceRoomCapacity = roomFeatureEntityService.getOneRoomFeatureByRoomId(roomId).getInstantRoomCapacity()-1;
+        roomFeatureEntityService.updateInstanceRoomCapacity(roomId,instanceRoomCapacity);
     }
 }
