@@ -16,15 +16,19 @@ public class Address {
     @Column(name="country")
     private String country;
     @Column(name="address_type")
-    private String address_type;
+    private String addressType;
+    @Column(name = "address_description")
+    private String addressDescription;
 
-    public Address(Long id, String street, String city, String country, String address_type) {
+    public Address(Long id, String street, String city, String country, String addressType, String addressDescription) {
         this.id = id;
         this.street = street;
         this.city = city;
         this.country = country;
-        this.address_type = address_type;
+        this.addressType = addressType;
+        this.addressDescription = addressDescription;
     }
+
     public Address(){}
 
     public Long getId() {
@@ -59,12 +63,19 @@ public class Address {
         this.country = country;
     }
 
-    public String getAddress_type() {
-        return address_type;
+    public String getAddressType() {
+        return addressType;
     }
 
-    public void setAddress_type(String address_type) {
-        this.address_type = address_type;
+    public void setAddressType(String addressType) {
+        this.addressType = addressType;
     }
 
+    public String getAddressDescription() {
+        return addressDescription;
+    }
+
+    public void setAddressDescription(String addressDescription) {
+        this.addressDescription = addressDescription;
+    }
 }

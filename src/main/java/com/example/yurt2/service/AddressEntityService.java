@@ -27,7 +27,7 @@ public class AddressEntityService {
         Optional<Address> address = addressRepository.findById(addressId);
         if(address.isPresent()){
             Address foundAddress=address.get();
-            foundAddress.setAddress_type(newAddress.getAddress_type());
+            foundAddress.setAddressType(newAddress.getAddressType());
             foundAddress.setCity(newAddress.getCity());
             foundAddress.setCountry(newAddress.getCountry());
             foundAddress.setStreet(newAddress.getStreet());
