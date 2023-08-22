@@ -4,6 +4,8 @@ import com.example.yurt2.entity.StudentRoomRelation;
 import com.example.yurt2.service.StudentRoomRelationService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/studentRoomRelation")
 public class StudentRoomRelationController {
@@ -17,6 +19,10 @@ public class StudentRoomRelationController {
     @GetMapping("/{studentRoomRelationId}")
     public StudentRoomRelation getOneStudentRoomRelation(@PathVariable Long studentRoomRelationId){
         return studentRoomRelationService.getOneStudentRoomRelationById(studentRoomRelationId);
+    }
+    @GetMapping("/{studentIdentityNumber}")
+    public List<StudentRoomRelation> getAllStudentRoomRelationByStudentIdentityNumber(@PathVariable String studentIdentityNumber){
+        return studentRoomRelationService.getAllStudentRoomRelationByStudentIdentityNumber(studentIdentityNumber);
     }
 
     @PostMapping("/create")

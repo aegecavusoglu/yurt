@@ -5,6 +5,7 @@ import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -37,4 +38,7 @@ public class StudentRoomRelationService {
 
     }
 
+    public List<StudentRoomRelation> getAllStudentRoomRelationByStudentIdentityNumber(String studentIdentityNumber) {
+        return studentRoomRelationEntityService.getAllStudentRoomRelationByStudentIdentityNumber(studentIdentityNumber);
+    }
 }

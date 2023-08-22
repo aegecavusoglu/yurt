@@ -4,6 +4,7 @@ import com.example.yurt2.entity.StudentRoomRelation;
 import com.example.yurt2.repository.StudentRoomRelationRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,5 +27,9 @@ public class StudentRoomRelationEntityService {
 
     public Optional<Long> findActiveStudentRoomRelationByStudentId(Long studentId){
         return studentRoomRelationRepository.findActiveStudentRoomRelationIdByStudentId(studentId);
+    }
+
+    public List<StudentRoomRelation> getAllStudentRoomRelationByStudentIdentityNumber(String studentIdentityNumber) {
+        return studentRoomRelationRepository.findByStudentId(studentRoomRelationRepository.findStudentIdByStudentIdentityNumber(studentIdentityNumber));
     }
 }
