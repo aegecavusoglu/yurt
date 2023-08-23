@@ -1,6 +1,7 @@
 package com.example.yurt2.controller;
 
 import com.example.yurt2.entity.Room;
+import com.example.yurt2.entity.Student;
 import com.example.yurt2.service.RoomService;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +37,11 @@ public class RoomController {
     @DeleteMapping("/delete/{roomId}")
     public void deleteOneRoom(@PathVariable Long roomId){
         roomService.deleteById(roomId);
+    }
+
+   @GetMapping("/getStudentInOneRoom/{roomNumber}")
+    public List<Student> getStudentInOneRoom(@PathVariable Long roomNumber){
+        return roomService.getStudentInOneRoom(roomNumber);
     }
 
 

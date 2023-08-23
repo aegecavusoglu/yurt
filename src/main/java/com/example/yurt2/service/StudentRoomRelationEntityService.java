@@ -36,4 +36,9 @@ public class StudentRoomRelationEntityService {
     public List<StudentRoomRelation> getAllStudentRoomRelation() {
         return studentRoomRelationRepository.findAll();
     }
+
+    public List<StudentRoomRelation> getAllRelationsForOneRoomByRoomId(Long roomId) {
+        return studentRoomRelationRepository.findAllByRoomId(roomId);
+    }
+
 }

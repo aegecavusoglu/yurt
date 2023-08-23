@@ -33,4 +33,9 @@ public class StudentRoomRelationController {
     public StudentRoomRelation createOneStudentRoomRelation(@RequestBody StudentRoomRelation newStudentRoomRelation){
         return studentRoomRelationService.createOneStudentRoomRelation(newStudentRoomRelation);}
 
+    @GetMapping("/getOneRoomRecords/{roomNumber}")
+    public List<StudentRoomRelation> getAllRelationsForOneRoomByRoomNumber(@PathVariable Long roomNumber){
+        return studentRoomRelationService.getAllRelationsForOneRoomByRoomNumber(roomNumber);
+    }
+
 }

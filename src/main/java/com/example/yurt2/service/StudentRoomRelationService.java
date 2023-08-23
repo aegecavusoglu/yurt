@@ -1,5 +1,6 @@
 package com.example.yurt2.service;
 
+import com.example.yurt2.entity.Room;
 import com.example.yurt2.entity.Student;
 import com.example.yurt2.entity.StudentRoomRelation;
 import org.springframework.stereotype.Service;
@@ -13,11 +14,13 @@ public class StudentRoomRelationService {
     StudentRoomRelationEntityService studentRoomRelationEntityService;
     RoomFeatureService roomFeatureService;
     StudentService studentService;
+    RoomService roomService;
 
-    public StudentRoomRelationService(StudentRoomRelationEntityService studentRoomRelationEntityService, RoomFeatureService roomFeatureService, StudentService studentService) {
+    public StudentRoomRelationService(StudentRoomRelationEntityService studentRoomRelationEntityService, RoomFeatureService roomFeatureService, StudentService studentService,RoomService roomService) {
         this.studentRoomRelationEntityService = studentRoomRelationEntityService;
         this.roomFeatureService = roomFeatureService;
         this.studentService = studentService;
+        this.roomService=roomService;
     }
 
     public StudentRoomRelation getOneStudentRoomRelationById(Long studentRoomRelationId) {
@@ -49,5 +52,14 @@ public class StudentRoomRelationService {
     }
     public List<StudentRoomRelation> getAllStudentRoomRelation(){
         return studentRoomRelationEntityService.getAllStudentRoomRelation();
+    }
+
+    public List<StudentRoomRelation> getAllRelationsForOneRoomByRoomNumber(Long roomNumber) {
+        return studentRoomRelationEntityService.getAllRelationsForOneRoomByRoomId(findRoomIdByRoomNumber(roomNumber));
+    }
+
+    public Long findRoomIdByRoomNumber(Long roomNumber){
+        Room room=roomService.getOneRoomByRoomNumber(roomNumber);
+        return room.getId();
     }
 }

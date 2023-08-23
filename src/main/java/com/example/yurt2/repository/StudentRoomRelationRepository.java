@@ -12,4 +12,6 @@ public interface StudentRoomRelationRepository extends JpaRepository<StudentRoom
     @Query("select srl.id from StudentRoomRelation srl where srl.endDate = null and srl.studentId=:studentId")
     Optional<Long> findActiveStudentRoomRelationIdByStudentId(@Param("studentId") Long studentId);
     List<StudentRoomRelation> findAllByStudentId(Long studentId);
+
+    List<StudentRoomRelation> findAllByRoomId(Long roomId);
 }

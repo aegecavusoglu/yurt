@@ -1,6 +1,7 @@
 package com.example.yurt2.service;
 
 import com.example.yurt2.entity.Room;
+import com.example.yurt2.entity.StudentRoomRelation;
 import com.example.yurt2.repository.RoomRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +13,10 @@ import java.util.Optional;
 
 public class RoomEntityService {
     RoomRepository roomRepository;
-    DormitoryService dormitoryService;
 
-    public RoomEntityService(RoomRepository roomRepository, DormitoryService dormitoryService)
-    {
+    public RoomEntityService(RoomRepository roomRepository) {
         this.roomRepository = roomRepository;
-        this.dormitoryService = dormitoryService;
     }
-
 
     public List<Room> getAllRooms() {
 
@@ -54,5 +51,7 @@ public class RoomEntityService {
     {
         roomRepository.deleteById(roomId);
     }
+
+
 
 }
