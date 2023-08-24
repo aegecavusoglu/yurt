@@ -10,11 +10,11 @@ import java.util.Optional;
 @Service
 public class AddressStudentRelationService {
     AddressStudentRelationEntityService addressStudentRelationEntityService;
-    StudentService studentService;
+    StudentEntityService studentEntityService;
 
-    public AddressStudentRelationService(AddressStudentRelationEntityService addressStudentRelationEntityService, StudentService studentService) {
+    public AddressStudentRelationService(AddressStudentRelationEntityService addressStudentRelationEntityService, StudentEntityService studentEntityService) {
         this.addressStudentRelationEntityService = addressStudentRelationEntityService;
-        this.studentService = studentService;
+        this.studentEntityService = studentEntityService;
     }
     public List<AddressStudentRelation> getAllAddressStudentRelation()
     {return addressStudentRelationEntityService.getAllAddressStudentRelation();}
@@ -37,7 +37,7 @@ public class AddressStudentRelationService {
     }
 
     public List<AddressStudentRelation> getAllAddressStudentRelationByStudentIdentityNumber(String studentIdentityNumber) {
-        Student student = studentService.getOneStudentByIdentityNumber(studentIdentityNumber).get();
+        Student student = studentEntityService.getOneStudentByIdentityNumber(studentIdentityNumber).get();
         return addressStudentRelationEntityService.getOneAddressStudentRelationByStudentId(student.getId());
     }
 }
