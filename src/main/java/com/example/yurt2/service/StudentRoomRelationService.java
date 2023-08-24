@@ -33,7 +33,7 @@ public class StudentRoomRelationService {
         Date today =new Date();
         if (studentRoomRelationId.isPresent()) {
             StudentRoomRelation studentRoomRelation = getOneStudentRoomRelationById(studentRoomRelationId.get());
-            newStudentRoomRelation.setEndDate(today);
+            studentRoomRelation.setEndDate(today);
             roomFeatureService.decreaseInstanceRoomCapacity(studentRoomRelation.getRoomId());
 
         }

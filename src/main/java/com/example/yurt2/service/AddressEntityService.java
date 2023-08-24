@@ -2,6 +2,7 @@ package com.example.yurt2.service;
 
 import com.example.yurt2.entity.Address;
 import com.example.yurt2.repository.AddressRepository;
+import com.example.yurt2.request.AddressCreateRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +21,13 @@ public class AddressEntityService {
     public Optional<Address> getOneAddressById(Long addressId){
         return addressRepository.findById(addressId);
     }
-    public Address createAddress(Address newAddress){
+    public Address createAddress(AddressCreateRequest addressCreateRequest){
+        Address newAddress = new Address();
+        newAddress.setAddressType(addressCreateRequest.getAddressType());
+        newAddress.setAddressDescription(addressCreateRequest.getAddressDescription());
+        newAddress.setCity(addressCreateRequest.getCity());
+        newAddress.setCountry(addressCreateRequest.getCountry());
+        newAddress.setStreet(addressCreateRequest.getStreet());
         return addressRepository.save(newAddress);
     }
     public Address updateAddress(Long addressId,Address newAddress){

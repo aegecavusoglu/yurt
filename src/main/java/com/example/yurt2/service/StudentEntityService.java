@@ -2,6 +2,7 @@ package com.example.yurt2.service;
 
 import com.example.yurt2.entity.Student;
 import com.example.yurt2.repository.StudentRepository;
+import com.example.yurt2.request.StudentCreateRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +18,15 @@ public class StudentEntityService {
     public Student getOneStudentById(Long studentId){
         return studentRepository.findById(studentId).orElse(null);
     }
-    public Student createStudent(Student newStudent){
+    public Student createStudent(StudentCreateRequest studentCreateRequest){
+        Student newStudent = new Student();
+        newStudent.setName(studentCreateRequest.getName());
+        newStudent.setFamilyNumber(studentCreateRequest.getFamilyNumber());
+        newStudent.setSurname(studentCreateRequest.getSurname());
+        newStudent.setAddressId(studentCreateRequest.getAddressId());
+        newStudent.setIdentityNumber(studentCreateRequest.getIdentityNumber());
+        newStudent.setPhoneNumber(studentCreateRequest.getPhoneNumber());
+        newStudent.setSchoolName(studentCreateRequest.getSchoolName());
         return studentRepository.save(newStudent);
     }
     public Optional<Student> getOneStudentByIdentityNumber(String identityNumber){
@@ -41,7 +50,5 @@ public class StudentEntityService {
             return null;
         }
     }
-
-
 
 }
