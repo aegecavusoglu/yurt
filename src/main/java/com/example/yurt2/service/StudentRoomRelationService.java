@@ -1,6 +1,7 @@
 package com.example.yurt2.service;
 
 import com.example.yurt2.entity.Room;
+import com.example.yurt2.entity.RoomFeature;
 import com.example.yurt2.entity.Student;
 import com.example.yurt2.entity.StudentRoomRelation;
 import org.springframework.stereotype.Service;
@@ -31,15 +32,19 @@ public class StudentRoomRelationService {
     public StudentRoomRelation createOneStudentRoomRelation(StudentRoomRelation newStudentRoomRelation) {
         Optional<Long> studentRoomRelationId =studentRoomRelationEntityService.findActiveStudentRoomRelationByStudentId(newStudentRoomRelation.getStudentId());
         Date today =new Date();
-        if (studentRoomRelationId.isPresent()) {
-            StudentRoomRelation studentRoomRelation = getOneStudentRoomRelationById(studentRoomRelationId.get());
-            studentRoomRelation.setEndDate(today);
-            roomFeatureService.decreaseInstanceRoomCapacity(studentRoomRelation.getRoomId());
+        RoomFeature roomFeature = roomFeatureService.getOneRoomFeatureByRoomId(newStudentRoomRelation.getRoomId());
+        if(!roomFeature.isFull()){
+            if (studentRoomRelationId.isPresent()) {
+                StudentRoomRelation studentRoomRelation = getOneStudentRoomRelationById(studentRoomRelationId.get());
+                studentRoomRelation.setEndDate(today);
+                roomFeatureService.decreaseInstanceRoomCapacity(studentRoomRelation.getRoomId());
 
+            }
+            roomFeatureService.increaseInstanceRoomCapacity(newStudentRoomRelation.getRoomId());
+            newStudentRoomRelation.setStartDate(today);
+            return studentRoomRelationEntityService.createOneStudentRoomRelation(newStudentRoomRelation);
         }
-        roomFeatureService.increaseInstanceRoomCapacity(newStudentRoomRelation.getRoomId());
-        newStudentRoomRelation.setStartDate(today);
-        return studentRoomRelationEntityService.createOneStudentRoomRelation(newStudentRoomRelation);
+        return null;
 
     }
 

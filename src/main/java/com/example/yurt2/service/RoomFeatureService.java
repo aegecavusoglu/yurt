@@ -74,8 +74,12 @@ public class RoomFeatureService {
         return roomFeatureEntityService.findTheMostCrowdedRoom();
     }
     public void increaseInstanceRoomCapacity(Long roomId){
-        int instanceRoomCapacity = roomFeatureEntityService.getOneRoomFeatureByRoomId(roomId).getInstantRoomCapacity()+1;
+        RoomFeature roomFeature = roomFeatureEntityService.getOneRoomFeatureByRoomId(roomId);
+        int instanceRoomCapacity = roomFeature.getInstantRoomCapacity()+1;
         roomFeatureEntityService.updateInstanceRoomCapacity(roomId,instanceRoomCapacity);
+        if (roomFeature.getInstantRoomCapacity()==roomFeature.getRoomType()){
+            roomFeature.setFull(true);
+        }
     }
     public void decreaseInstanceRoomCapacity(Long roomId){
         int instanceRoomCapacity = roomFeatureEntityService.getOneRoomFeatureByRoomId(roomId).getInstantRoomCapacity()-1;
