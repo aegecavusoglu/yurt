@@ -1,6 +1,7 @@
 package com.example.yurt2.service;
 
 import com.example.yurt2.entity.AddressStudentRelation;
+import com.example.yurt2.entity.Student;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,9 +10,11 @@ import java.util.Optional;
 @Service
 public class AddressStudentRelationService {
     AddressStudentRelationEntityService addressStudentRelationEntityService;
+    StudentService studentService;
 
-    public AddressStudentRelationService(AddressStudentRelationEntityService addressStudentRelationEntityService) {
+    public AddressStudentRelationService(AddressStudentRelationEntityService addressStudentRelationEntityService, StudentService studentService) {
         this.addressStudentRelationEntityService = addressStudentRelationEntityService;
+        this.studentService = studentService;
     }
     public List<AddressStudentRelation> getAllAddressStudentRelation()
     {return addressStudentRelationEntityService.getAllAddressStudentRelation();}
@@ -31,5 +34,10 @@ public class AddressStudentRelationService {
         else {
             return true;
         }
+    }
+
+    public List<AddressStudentRelation> getAllAddressStudentRelationByStudentIdentityNumber(String studentIdentityNumber) {
+        Student student = studentService.getOneStudentByIdentityNumber(studentIdentityNumber).get();
+        return addressStudentRelationEntityService.getOneAddressStudentRelationByStudentId(student.getId());
     }
 }

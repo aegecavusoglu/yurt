@@ -29,4 +29,5 @@ public class AddressStudentRelationEntityService {
     public List<AddressStudentRelation> getOneAddressStudentRelationByStudentId(Long studentId) {
         return addressStudentRelationRepository.findByStudentId(studentId);
     }
+
 }
