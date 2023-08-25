@@ -1,6 +1,8 @@
 package com.example.yurt2.controller;
 
 import com.example.yurt2.entity.Dormitory;
+import com.example.yurt2.entity.RoomFeature;
+import com.example.yurt2.entity.Student;
 import com.example.yurt2.service.DormitoryEntityService;
 import com.example.yurt2.service.DormitoryService;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +44,23 @@ public class DormitoryController {
     public void deleteOneDormitory(@PathVariable Long dormitory_id){
         dormitoryEntityService.deleteById(dormitory_id);
     }
+
+    @GetMapping("/getFreeCapacity/{dormitoryId}")
+    public int getFreeCapacity(@PathVariable Long dormitoryId){
+        return dormitoryService.getFreeCapacity(dormitoryId);
+    }
+    @GetMapping("/getFreeRooms")
+    public List<RoomFeature> getFreeRooms(){
+        return dormitoryService.getFreeRooms();
+
+    }
+
+    @GetMapping("/Schools")
+    public List<String> getSchoolList(){
+        return dormitoryService.getSchoolList();
+    }
+
+
 
 
 

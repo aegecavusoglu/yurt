@@ -39,8 +39,8 @@ public class RoomFeature {
         return isFull;
     }
 
-    public void setFull(boolean full) {
-        isFull = full;
+    public void setIsFull(boolean isFull) {
+        isFull = isFull;
     }
 
     public void setPrice(int price) {

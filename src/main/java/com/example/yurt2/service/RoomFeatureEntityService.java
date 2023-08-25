@@ -4,6 +4,7 @@ import com.example.yurt2.entity.RoomFeature;
 import com.example.yurt2.repository.RoomFeatureRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,7 +55,21 @@ public class RoomFeatureEntityService {
 
 
     public List<RoomFeature> findTheMostCrowdedRoom() {
-        return roomFeatureRepository.findTheMostCrowdedRoom();
+        List<Long> roomId=roomFeatureRepository.findTheMostCrowdedRoom();
+        List<RoomFeature> roomFeatures = new ArrayList<>();
+        for(int i=0;i<roomId.size();i++){
+            roomFeatures.add(getOneRoomFeatureByRoomId(roomId.get(i)));
+        }
+        return roomFeatures;
     }
 
+
+    public List<RoomFeature> findRoomFeatureByRoomId(Long roomId) {
+        return roomFeatureRepository.findRoomFeatureByRoomId(roomId);
+    }
+
+    public List<RoomFeature> getFreeRooms() {
+        return roomFeatureRepository.findByIsFullIsFalse();
+
+    }
 }

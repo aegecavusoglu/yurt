@@ -55,7 +55,5 @@ public class RoomService {
             students.add(studentService.getOneStudentById(studentRoomRelation.get(i).getStudentId()));
         }
         return students;
-
-
     }
 }

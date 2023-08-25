@@ -34,4 +34,10 @@ public class RoomFeatureController {
     public List<RoomFeature> findTheMostCrowdedRoom(){
         return roomFeatureService.findTheMostCrowdedRoom();
     }
+    @GetMapping("/oneRoomFeature/{roomNumber}")
+    public List<RoomFeature> findRoomFeatureByRoomNumber(@PathVariable Long roomNumber){
+        return roomFeatureService.findRoomFeatureByRoomNumber(roomNumber);
+    }
 }
+
+

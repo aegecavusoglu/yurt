@@ -1,6 +1,6 @@
 package com.example.yurt2.service;
 
-
+import com.example.yurt2.entity.Room;
 import com.example.yurt2.entity.RoomFeature;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -9,18 +9,21 @@ import org.springframework.transaction.support.TransactionTemplate;
 import java.util.List;
 
 
+
 @Service
 public class RoomFeatureService {
     RoomFeatureEntityService roomFeatureEntityService;
-    StudentContractService studentContractService;
+    StudentContractEntityService studentContractEntityService;
     DormitoryService dormitoryService;
+    RoomService roomService;
     private final TransactionTemplate transactionTemplate;
 
-    public RoomFeatureService(RoomFeatureEntityService roomFeatureEntityService, StudentContractService studentContractService, PlatformTransactionManager transactionTemplate, DormitoryService dormitoryService ) {
+    public RoomFeatureService(RoomFeatureEntityService roomFeatureEntityService, StudentContractEntityService studentContractEntityService, PlatformTransactionManager transactionTemplate, DormitoryService dormitoryService,RoomService roomService ) {
         this.roomFeatureEntityService = roomFeatureEntityService;
-        this.studentContractService = studentContractService;
+        this.studentContractEntityService = studentContractEntityService;
         this.transactionTemplate = new TransactionTemplate(transactionTemplate);
         this.dormitoryService = dormitoryService;
+        this.roomService=roomService;
     }
 
 
@@ -29,8 +32,8 @@ public class RoomFeatureService {
         newRoomFeature.setRoomId(roomFeature.getRoomId());
         newRoomFeature.setRoomType(roomFeature.getRoomType());
         newRoomFeature.setPrice(roomFeature.getPrice());
-        newRoomFeature.setInstantRoomCapacity(studentContractService.findActiveStudentsNumberByRoomId(roomFeature.getRoomId()));
-        newRoomFeature.setFull(isRoomFull(roomFeature));
+        newRoomFeature.setInstantRoomCapacity(studentContractEntityService.findActiveStudentsNumberByRoomId(roomFeature.getRoomId()));
+        newRoomFeature.setIsFull(isRoomFull(roomFeature));
         return roomFeature;
     }
     public RoomFeature createRoomFeatureAndUpdateCapacity(RoomFeature newRoomFeature){
@@ -53,7 +56,11 @@ public class RoomFeatureService {
     }
     public boolean isRoomFull(RoomFeature roomFeature){
         int remainCapacity=roomFeature.getRoomType()-roomFeature.getInstantRoomCapacity();
-        return remainCapacity == 0;
+        if (remainCapacity==0){
+            return true;
+        }
+        else
+            return false;
     }
     public RoomFeature updateOneRoomFeature(Long roomId, RoomFeature newRoomFeature) {
         var roomFeature = roomFeatureEntityService.updateOneRoomFeature(roomId,newRoomFeature);
@@ -69,19 +76,20 @@ public class RoomFeatureService {
         return roomFeatureEntityService.findTheMostCrowdedRoom();
     }
     public void increaseInstanceRoomCapacity(Long roomId){
-        RoomFeature roomFeature = roomFeatureEntityService.getOneRoomFeatureByRoomId(roomId);
-        int instanceRoomCapacity = roomFeature.getInstantRoomCapacity()+1;
+        int instanceRoomCapacity = roomFeatureEntityService.getOneRoomFeatureByRoomId(roomId).getInstantRoomCapacity()+1;
         roomFeatureEntityService.updateInstanceRoomCapacity(roomId,instanceRoomCapacity);
-        if (roomFeature.getInstantRoomCapacity()==roomFeature.getRoomType()){
-            roomFeature.setFull(true);
-        }
     }
     public void decreaseInstanceRoomCapacity(Long roomId){
-        RoomFeature roomFeature = roomFeatureEntityService.getOneRoomFeatureByRoomId(roomId);
-        int instanceRoomCapacity = roomFeature.getInstantRoomCapacity()-1;
+        int instanceRoomCapacity = roomFeatureEntityService.getOneRoomFeatureByRoomId(roomId).getInstantRoomCapacity()-1;
         roomFeatureEntityService.updateInstanceRoomCapacity(roomId,instanceRoomCapacity);
-        if (roomFeature.isFull()){
-            roomFeature.setFull(false);
-        }
+    }
+
+    public List<RoomFeature> findRoomFeatureByRoomNumber(Long roomNumber) {
+        return roomFeatureEntityService.findRoomFeatureByRoomId(findRoomIdByRoomNumber(roomNumber));
+    }
+
+    public Long findRoomIdByRoomNumber(Long roomNumber){
+        Room room=roomService.getOneRoomByRoomNumber(roomNumber);
+        return room.getId();
     }
 }

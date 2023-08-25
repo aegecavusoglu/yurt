@@ -18,5 +18,7 @@ public interface RoomFeatureRepository extends JpaRepository<RoomFeature,Long> {
 
 
     @Query("SELECT roomId FROM RoomFeature WHERE instantRoomCapacity = (SELECT MAX(instantRoomCapacity) FROM RoomFeature)")
-    List<RoomFeature> findTheMostCrowdedRoom();
+    List<Long> findTheMostCrowdedRoom();
+    List<RoomFeature> findRoomFeatureByRoomId(Long roomId);
+    List<RoomFeature> findByIsFullIsFalse();
 }

@@ -38,4 +38,5 @@ public class StudentRoomRelationController {
         return studentRoomRelationService.getAllRelationsForOneRoomByRoomNumber(roomNumber);
     }
 
+
 }

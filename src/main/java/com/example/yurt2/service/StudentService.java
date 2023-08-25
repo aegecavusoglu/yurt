@@ -75,4 +75,12 @@ public class StudentService {
     public Student updateStudent(Long studentId, Student newStudent){
         return studentEntityService.updateStudent(studentId,newStudent);
     }
+
+    public List<Student> getStudentByName(String name) {
+        return studentEntityService.getStudentByName(name);
+    }
+
+    public List<String> getSchoolListWithStudentCount() {
+        return studentEntityService.getSchoolListWithStudentCount();
+    }
 }

@@ -40,5 +40,10 @@ public class StudentController {
         studentService.changeStudentAddress(studentId,addressCreateRequest);
     }
 
+    @GetMapping("/getStudent/{name}")
+    public List<Student> getStudentByName(@PathVariable String name){
+        return studentService.getStudentByName(name);
+    }
+
 
 }
