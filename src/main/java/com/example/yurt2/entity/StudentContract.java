@@ -2,6 +2,7 @@ package com.example.yurt2.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -16,11 +17,11 @@ public class StudentContract {
     @Column(name="contract_start_date")
     private Date contractStartDate;
     @Column(name="contract_end_date")
-    private Date contractEndDate;
+    private LocalDate contractEndDate;
     @Column(name = "is_valid")
     private boolean isValid;
 
-    public StudentContract(Long id, Long studentId, Date contractStartDate, Date contractEndDate, boolean isValid) {
+    public StudentContract(Long id, Long studentId, Date contractStartDate, LocalDate contractEndDate, boolean isValid) {
         this.id = id;
         this.studentId = studentId;
         this.contractStartDate = contractStartDate;
@@ -55,11 +56,11 @@ public class StudentContract {
         this.contractStartDate = contractStartDate;
     }
 
-    public Date getContractEndDate() {
+    public LocalDate getContractEndDate() {
         return contractEndDate;
     }
 
-    public void setContractEndDate(Date contractEndDate) {
+    public void setContractEndDate(LocalDate contractEndDate) {
         this.contractEndDate = contractEndDate;
     }
 
@@ -67,7 +68,7 @@ public class StudentContract {
         return isValid;
     }
 
-    public void setValid(boolean valid) {
-        isValid = valid;
+    public void setIsValid(boolean isValid) {
+        this.isValid = isValid;
     }
 }

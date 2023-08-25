@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface StudentContractRepository extends JpaRepository<StudentContract,Long> {
 
-    Optional<StudentContract> findByStudentId(Long studentId);
+    Optional<StudentContract> findByStudentIdAndIsValidIsTrue(Long studentId);
     @Query("select count(sc.isValid) from StudentContract sc join StudentRoomRelation srl on sc.studentId = srl.studentId where sc.isValid=true and srl.endDate=null and srl.roomId=:roomId")
     int findActiveStudentsNumberByRoomId(@Param("roomId") Long roomId);
 }

@@ -2,8 +2,11 @@ package com.example.yurt2.service;
 
 import com.example.yurt2.entity.StudentContract;
 import com.example.yurt2.repository.StudentContractRepository;
+import com.example.yurt2.request.StudentContractCreateRequest;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,20 +24,42 @@ public class StudentContractEntityService {
     }
 
     public StudentContract getOneContractByStudentId(Long studentId) {
-        return studentContractRepository.findByStudentId(studentId).orElse(null);
+        return studentContractRepository.findByStudentIdAndIsValidIsTrue(studentId).orElse(null);
     }
 
-    public StudentContract createOneContract(StudentContract newStudentContract) {
-        return studentContractRepository.save(newStudentContract);
+    public StudentContract createOneContract(StudentContractCreateRequest studentContractCreateRequest) {
+        StudentContract studentContract = new StudentContract();
+        if (getOneContractByStudentId(studentContractCreateRequest.getStudentId())!=null){
+            StudentContract oldStudentContract=getOneContractByStudentId(studentContractCreateRequest.getStudentId());
+            oldStudentContract.setIsValid(false);
+        }
+        studentContract.setStudentId(studentContractCreateRequest.getStudentId());
+        Date today = new Date();
+        LocalDate contractEndDate = LocalDate.now();
+        contractEndDate=contractEndDate.plusMonths(6);
+        if (studentContractCreateRequest.getContractStartDate()!=null){
+            studentContract.setContractStartDate(studentContractCreateRequest.getContractStartDate());
+        }
+        else {
+            studentContract.setContractStartDate(today);
+        }
+        if (studentContractCreateRequest.getContractEndDate()!=null){
+            studentContract.setContractEndDate(studentContractCreateRequest.getContractEndDate());
+        }
+        else {
+            studentContract.setContractEndDate(contractEndDate);
+        }
+        studentContract.setIsValid(true);
+        return studentContractRepository.save(studentContract);
     }
 
     public StudentContract updateOneContract(Long studentId, StudentContract newStudentContract) {
-        Optional<StudentContract> studentContract=studentContractRepository.findByStudentId((studentId));
+        Optional<StudentContract> studentContract=studentContractRepository.findByStudentIdAndIsValidIsTrue(studentId);
         if(studentContract.isPresent()){
             StudentContract foundContract=studentContract.get();
             foundContract.setContractStartDate(newStudentContract.getContractStartDate());
             foundContract.setContractEndDate(newStudentContract.getContractEndDate());
-            foundContract.setValid(newStudentContract.isValid());
+            foundContract.setIsValid(newStudentContract.isValid());
             studentContractRepository.save(foundContract);
             return foundContract;
         }

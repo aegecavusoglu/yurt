@@ -25,7 +25,7 @@ public class StudentRoomRelationEntityService {
         return studentRoomRelationRepository.save(newStudentRoomRelation);
     }
 
-    public Optional<Long> findActiveStudentRoomRelationByStudentId(Long studentId){
+    public Optional<Long> findActiveStudentRoomRelationIdByStudentId(Long studentId){
         return studentRoomRelationRepository.findActiveStudentRoomRelationIdByStudentId(studentId);
     }
 
