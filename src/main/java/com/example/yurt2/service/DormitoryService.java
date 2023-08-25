@@ -54,4 +54,13 @@ public class DormitoryService {
     public List<String> getSchoolList() {
         return studentService.getSchoolListWithStudentCount();
     }
+
+    public int calculateOneMonthIncomes() {
+        List<RoomFeature> roomFeatures = roomFeatureEntityService.getAllRoomFeature();
+        int incomes =0;
+        for (int i =0; i<roomFeatures.size();i++){
+            incomes+=roomFeatures.get(i).getInstantRoomCapacity()*roomFeatures.get(i).getPrice();
+        }
+        return incomes;
+    }
 }
