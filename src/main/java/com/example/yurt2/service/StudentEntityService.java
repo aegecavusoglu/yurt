@@ -59,4 +59,8 @@ public class StudentEntityService {
     public List<String> getSchoolListWithStudentCount() {
         return studentRepository.getSchoolListWithStudentCount();
     }
+
+    public List<Student> getStudentByNameAndSurname(String name, String surname) {
+        return studentRepository.findStudentByNameAndSurname(name,surname);
+    }
 }

@@ -19,4 +19,6 @@ public interface StudentRepository extends JpaRepository<Student,Long> {
     @Query(" SELECT schoolName, COUNT(*) AS studentCount FROM Student GROUP BY schoolName ORDER BY studentCount DESC")
     List<String> getSchoolListWithStudentCount();
 
+    List<Student> findStudentByNameAndSurname(String name,String surname);
+
 }
