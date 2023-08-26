@@ -1,6 +1,7 @@
 package com.example.yurt2.service;
 
 import com.example.yurt2.entity.Address;
+import com.example.yurt2.exception.AddressNotFoundException;
 import com.example.yurt2.repository.AddressRepository;
 import com.example.yurt2.request.AddressCreateRequest;
 import org.springframework.stereotype.Service;
@@ -42,7 +43,7 @@ public class AddressEntityService {
             return foundAddress;
         }
         else {
-            return null;
+            throw new AddressNotFoundException("Address with id:" + addressId +" is not found.");
         }
     }
     public void deleteById(Long addressId){
