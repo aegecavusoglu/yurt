@@ -87,4 +87,8 @@ public class StudentService {
     public List<Student> getStudentByNameAndSurname(String name, String surname) {
         return studentEntityService.getStudentByNameAndSurname(name,surname);
     }
+
+    public List<Student> getStudentBySchoolName(String schoolName) {
+        return studentEntityService.getStudentBySchoolName(schoolName);
+    }
 }

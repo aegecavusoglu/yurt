@@ -63,4 +63,8 @@ public class StudentEntityService {
     public List<Student> getStudentByNameAndSurname(String name, String surname) {
         return studentRepository.findStudentByNameAndSurname(name,surname);
     }
+
+    public List<Student> getStudentBySchoolName(String schoolName) {
+        return studentRepository.findStudentBySchoolName(schoolName);
+    }
 }
