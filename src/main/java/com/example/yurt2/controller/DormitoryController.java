@@ -54,6 +54,10 @@ public class DormitoryController {
         return dormitoryService.getFreeRooms();
 
     }
+    @GetMapping("/dormitoryEstimatedOneMonthIncome")
+    public int calculateOneMonthIncomes(){
+        return dormitoryService.calculateOneMonthIncomes();
+    }
 
     @GetMapping("/Schools")
     public List<String> getSchoolList(){
