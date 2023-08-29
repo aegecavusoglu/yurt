@@ -1,6 +1,10 @@
 package com.example.yurt2.service;
 
+import com.example.yurt2.entity.Address;
 import com.example.yurt2.entity.RoomFeature;
+import com.example.yurt2.exception.AddressNotFoundException;
+import com.example.yurt2.exception.NoFreeRoomException;
+import com.example.yurt2.exception.RoomFeatureNotFoundException;
 import com.example.yurt2.repository.RoomFeatureRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +20,21 @@ public class RoomFeatureEntityService {
         this.roomFeatureRepository=roomFeatureRepository;}
 
     public List<RoomFeature> getAllRoomFeature(){
-        return roomFeatureRepository.findAll();
+        //return roomFeatureRepository.findAll();
+        List<RoomFeature> roomFeatures = roomFeatureRepository.findAll();
+        if(roomFeatures.isEmpty()){
+            throw new RoomFeatureNotFoundException("RoomFeatures could not found.");
+
+        }
+        else{
+            return roomFeatures;
+        }
     }
     public RoomFeature createOneRoomFeature(RoomFeature newRoomFeature) {
         return roomFeatureRepository.save(newRoomFeature);
     }
     public RoomFeature getOneRoomFeatureByRoomId(Long roomId) {
-        return roomFeatureRepository.findByRoomId(roomId).orElse(null);
+        return roomFeatureRepository.findByRoomId(roomId).orElseThrow(()->new RoomFeatureNotFoundException("RoomFeature of the room with id:" + roomId + " is not found."));
 
     }
     public RoomFeature updateOneRoomFeature(Long roomId, RoomFeature newRoomFeature) {
@@ -35,7 +47,7 @@ public class RoomFeatureEntityService {
             return foundRoomFeature;
         }
         else{
-            return null;
+            throw new RoomFeatureNotFoundException("RoomFeature of the room with id:" + roomId + " is not found.");
         }
     }
     public void updateInstanceRoomCapacity(Long roomId, int instanceRoomCapacity){
@@ -69,7 +81,16 @@ public class RoomFeatureEntityService {
     }
 
     public List<RoomFeature> getFreeRooms() {
-        return roomFeatureRepository.findByIsFullIsFalse();
+        //return roomFeatureRepository.findByIsFullIsFalse();
+        List<RoomFeature> freeRooms = roomFeatureRepository.findByIsFullIsFalse();
+        if(freeRooms.isEmpty()){
+            throw new NoFreeRoomException("All rooms have at least 1 enrolled student.");
+
+        }
+        else{
+            return freeRooms;
+        }
+
 
     }
 }

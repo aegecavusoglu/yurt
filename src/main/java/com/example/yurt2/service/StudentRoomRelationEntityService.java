@@ -1,6 +1,9 @@
 package com.example.yurt2.service;
 
+import com.example.yurt2.entity.Student;
 import com.example.yurt2.entity.StudentRoomRelation;
+import com.example.yurt2.exception.RoomRelationNotFoundException;
+import com.example.yurt2.exception.StudentNotFoundException;
 import com.example.yurt2.repository.StudentRoomRelationRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +20,7 @@ public class StudentRoomRelationEntityService {
     }
 
     public StudentRoomRelation getOneStudentRoomRelationById(Long studentRoomRelationId) {
-        return studentRoomRelationRepository.findById(studentRoomRelationId).orElse(null);
+        return studentRoomRelationRepository.findById(studentRoomRelationId).orElseThrow(()->new RoomRelationNotFoundException("Room relation not found by this id."));
     }
 
 
@@ -27,6 +30,7 @@ public class StudentRoomRelationEntityService {
 
     public Optional<Long> findActiveStudentRoomRelationIdByStudentId(Long studentId){
         return studentRoomRelationRepository.findActiveStudentRoomRelationIdByStudentId(studentId);
+
     }
 
     public List<StudentRoomRelation> getAllStudentRoomRelationByStudentId(Long studentId) {
@@ -34,7 +38,15 @@ public class StudentRoomRelationEntityService {
     }
 
     public List<StudentRoomRelation> getAllStudentRoomRelation() {
-        return studentRoomRelationRepository.findAll();
+        //return studentRoomRelationRepository.findAll();
+        List<StudentRoomRelation> studentRoomRelations = studentRoomRelationRepository.findAll();
+        if(studentRoomRelations.isEmpty()){
+            throw new StudentNotFoundException("There are no relations.");
+
+        }
+        else{
+            return studentRoomRelations;
+        }
     }
 
     public List<StudentRoomRelation> getAllRelationsForOneRoomByRoomId(Long roomId) {

@@ -2,6 +2,7 @@ package com.example.yurt2.service;
 
 import com.example.yurt2.entity.AddressStudentRelation;
 import com.example.yurt2.entity.Student;
+import com.example.yurt2.exception.StudentNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,8 +37,15 @@ public class AddressStudentRelationService {
         }
     }
 
-    public List<AddressStudentRelation> getAllAddressStudentRelationByStudentIdentityNumber(String studentIdentityNumber) {
-        Student student = studentEntityService.getOneStudentByIdentityNumber(studentIdentityNumber).get();
-        return addressStudentRelationEntityService.getOneAddressStudentRelationByStudentId(student.getId());
+    public List<AddressStudentRelation> getAllAddressStudentRelationByStudentIdentityNumber(String identityNumber) {
+        Student student = studentEntityService.getOneStudentByIdentityNumber(identityNumber).get();
+        if(student==null){
+            throw new StudentNotFoundException("Student with identityNumber:" + identityNumber +" could not found.");
+        }
+        else{
+            return addressStudentRelationEntityService.getOneAddressStudentRelationByStudentId(student.getId());
+        }
+
+        //return addressStudentRelationEntityService.getOneAddressStudentRelationByStudentId(student.getId());
     }
 }

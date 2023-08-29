@@ -1,6 +1,9 @@
 package com.example.yurt2.service;
 
+import com.example.yurt2.entity.Address;
 import com.example.yurt2.entity.Dormitory;
+import com.example.yurt2.exception.AddressNotFoundException;
+import com.example.yurt2.exception.DormitoryNotFoundException;
 import com.example.yurt2.repository.DormitoryRepository;
 import org.springframework.stereotype.Service;
 
@@ -10,52 +13,68 @@ import java.util.Optional;
 @Service
 
 public class DormitoryEntityService {
-    private DormitoryRepository dormitory_repository;
+    private DormitoryRepository dormitoryRepository;
     private RoomFeatureEntityService roomFeatureEntityService;
 
 
     public DormitoryEntityService(DormitoryRepository dormitoryRepository, RoomFeatureEntityService roomFeatureEntityService) {
-        this.dormitory_repository = dormitoryRepository;
+        this.dormitoryRepository = dormitoryRepository;
         this.roomFeatureEntityService = roomFeatureEntityService;
     }
     public List<Dormitory> getAllDormitories() {
-        return dormitory_repository.findAll();
+        //return dormitory_repository.findAll();
+        List<Dormitory> dormitories = dormitoryRepository.findAll();
+        if(dormitories.isEmpty()){
+            throw new AddressNotFoundException("Dormitory could not found.");
+
+        }
+        else{
+            return dormitories;
+        }
     }
     public Dormitory getOneDormitory(Long dormitoryId) {
-        return dormitory_repository.findById(dormitoryId).orElse(null);
+        return dormitoryRepository.findById(dormitoryId).orElseThrow(()->new DormitoryNotFoundException("Dormitory could not found by this id."));
     }
 
     public Dormitory createOneDormitory(Dormitory new_dormitory) {
-        return dormitory_repository.save(new_dormitory);
+        return dormitoryRepository.save(new_dormitory);
     }
 
 
     public Dormitory updateOneDormitory(Long dormitory_id, Dormitory newDormitory) {
-        Optional<Dormitory> dormitory=dormitory_repository.findById((dormitory_id));
+        Optional<Dormitory> dormitory=dormitoryRepository.findById((dormitory_id));
         if(dormitory.isPresent()){
             Dormitory foundDormitory=dormitory.get();
             foundDormitory.setName(newDormitory.getName());
             foundDormitory.setGeneral_capacity(newDormitory.getGeneral_capacity());
-            dormitory_repository.save(foundDormitory);
+            dormitoryRepository.save(foundDormitory);
             return foundDormitory;
         }
         else{
-            return null;
+            throw new DormitoryNotFoundException("Dormitory could not found by this id.");
         }
     }
     public void updateGeneralCapacity(int generalCapacity, Long dormitoryId){
-        Optional<Dormitory> dormitory=dormitory_repository.findById((dormitoryId));
+        Optional<Dormitory> dormitory=dormitoryRepository.findById((dormitoryId));
         if(dormitory.isPresent()){
             Dormitory foundDormitory=dormitory.get();
             foundDormitory.setGeneral_capacity(generalCapacity);
-            dormitory_repository.save(foundDormitory);
+            dormitoryRepository.save(foundDormitory);
         }
     }
 
 
 
     public void deleteById(Long dormitory_id) {
-        dormitory_repository.deleteById(dormitory_id);
+        //dormitoryRepository.deleteById(dormitory_id);
+        List<Dormitory> dormitories = dormitoryRepository.findAll();
+        if(dormitories.isEmpty()){
+            throw new AddressNotFoundException("Dormitory could not found.");
+
+        }
+        else{
+            dormitoryRepository.deleteById(dormitory_id);
+        }
     }
 
 }

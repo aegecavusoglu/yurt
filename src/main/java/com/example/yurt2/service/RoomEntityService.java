@@ -1,7 +1,11 @@
 package com.example.yurt2.service;
 
+import com.example.yurt2.entity.Address;
+import com.example.yurt2.entity.Dormitory;
 import com.example.yurt2.entity.Room;
 import com.example.yurt2.entity.StudentRoomRelation;
+import com.example.yurt2.exception.AddressNotFoundException;
+import com.example.yurt2.exception.RoomNotFoundException;
 import com.example.yurt2.repository.RoomRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +24,20 @@ public class RoomEntityService {
 
     public List<Room> getAllRooms() {
 
-        return roomRepository.findAll();
+        //return roomRepository.findAll();
+        List<Room> rooms = roomRepository.findAll();
+        if(rooms.isEmpty()){
+            throw new RoomNotFoundException("Rooms could not found");
 
-
+        }
+        else{
+            return rooms;
+        }
     }
 
+
     public Room getOneRoomByRoomNumber(Long roomNumber) {
-        return roomRepository.findByRoomNumber(roomNumber).orElse(null);
+        return roomRepository.findByRoomNumber(roomNumber).orElseThrow(()->new RoomNotFoundException("Room with roomNumber:" + roomNumber + " is not found."));
 
     }
 
@@ -43,13 +54,20 @@ public class RoomEntityService {
             return foundRoom;
         }
         else{
-            return null;
+            throw new RoomNotFoundException("Room with roomNumber:" + roomNumber + " is not found.");
         }
     }
 
     public void deleteById(Long roomId)
     {
-        roomRepository.deleteById(roomId);
+        //roomRepository.deleteById(roomId);
+        Optional<Room> room = roomRepository.findById(roomId);
+        if(room.isPresent()){
+            roomRepository.deleteById(roomId);
+        }
+        else{
+            throw new RoomNotFoundException("Room with id:" + roomId +" is not found.");
+        }
     }
 
 

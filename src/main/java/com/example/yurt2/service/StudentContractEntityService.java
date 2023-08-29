@@ -1,6 +1,10 @@
 package com.example.yurt2.service;
 
+import com.example.yurt2.entity.Room;
 import com.example.yurt2.entity.StudentContract;
+import com.example.yurt2.exception.ContractNotFoundException;
+import com.example.yurt2.exception.RoomNotFoundException;
+import com.example.yurt2.exception.StudentNotFoundException;
 import com.example.yurt2.repository.StudentContractRepository;
 import com.example.yurt2.request.StudentContractCreateRequest;
 import org.springframework.stereotype.Service;
@@ -20,11 +24,20 @@ public class StudentContractEntityService {
     }
 
     public List<StudentContract> getAllContracts() {
-        return studentContractRepository.findAll();
+
+        //return studentContractRepository.findAll();
+        List<StudentContract> studentContracts = studentContractRepository.findAll();
+        if(studentContracts.isEmpty()){
+            throw new ContractNotFoundException("Contracts could not found");
+
+        }
+        else{
+            return studentContracts;
+        }
     }
 
     public StudentContract getOneContractByStudentId(Long studentId) {
-        return studentContractRepository.findByStudentIdAndIsValidIsTrue(studentId).orElse(null);
+        return studentContractRepository.findByStudentIdAndIsValidIsTrue(studentId).orElseThrow(()->new ContractNotFoundException("There are no contracts available for this student."));
     }
 
     public StudentContract createOneContract(StudentContractCreateRequest studentContractCreateRequest) {
@@ -64,15 +77,23 @@ public class StudentContractEntityService {
             return foundContract;
         }
         else{
-            return null;
+            throw new ContractNotFoundException("There are no contracts available for this student.");
         }
 
     }
 
     public void deleteById(Long identityNumber) {
         studentContractRepository.deleteById(identityNumber);
+
     }
     public int findActiveStudentsNumberByRoomId(Long roomId){
-        return studentContractRepository.findActiveStudentsNumberByRoomId(roomId);
+        int activeStudents = studentContractRepository.findActiveStudentsNumberByRoomId(roomId);
+        if(activeStudents!=0){
+            return activeStudents;
+        }
+        else{
+            throw new StudentNotFoundException("There are no active student enrolled in this room.");
+        }
+        //return studentContractRepository.findActiveStudentsNumberByRoomId(roomId);
     }
 }

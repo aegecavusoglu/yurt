@@ -27,8 +27,8 @@ public class AddressStudentRelationController {
     public Optional<AddressStudentRelation> getOneAddressStudentRelationById(Long addressStudentRelationId){
         return addressStudentRelationService.getOneAddressStudentRelationById(addressStudentRelationId);
     }
-    @GetMapping("/getAddressStudentRelation/{studentIdentityNumber}")
-    public List<AddressStudentRelation> getAllAddressStudentRelationByStudentIdentityNumber(@PathVariable String studentIdentityNumber)
-    {return addressStudentRelationService.getAllAddressStudentRelationByStudentIdentityNumber(studentIdentityNumber);}
+    @GetMapping("/getAddressStudentRelation/{identityNumber}")
+    public List<AddressStudentRelation> getAllAddressStudentRelationByStudentIdentityNumber(@PathVariable String identityNumber)
+    {return addressStudentRelationService.getAllAddressStudentRelationByStudentIdentityNumber(identityNumber);}
 
 }

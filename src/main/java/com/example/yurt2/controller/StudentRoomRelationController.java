@@ -1,9 +1,13 @@
 package com.example.yurt2.controller;
 
+import com.example.yurt2.entity.Student;
 import com.example.yurt2.entity.StudentRoomRelation;
+import com.example.yurt2.exception.RoomRelationNotFoundException;
+import com.example.yurt2.exception.StudentNotFoundException;
 import com.example.yurt2.service.StudentRoomRelationService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.management.relation.RelationNotFoundException;
 import java.util.List;
 
 @RestController
@@ -18,6 +22,7 @@ public class StudentRoomRelationController {
     @GetMapping("/getAllRecords")
     public List<StudentRoomRelation> getAllStudentRoomRelation(){
         return studentRoomRelationService.getAllStudentRoomRelation();
+
     }
 
     @GetMapping("/{studentRoomRelationId}")

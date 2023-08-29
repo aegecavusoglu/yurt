@@ -17,10 +17,27 @@ public class AddressEntityService {
         this.addressRepository = addressRepository;
     }
 
-    public List<Address> getAllAddress()
-    {return addressRepository.findAll();}
+    public List<Address> getAllAddress() {
+        //return addressRepository.findAll();
+        List<Address> address = addressRepository.findAll();
+        if(address.isEmpty()){
+            throw new AddressNotFoundException("Adress could not found.");
+
+        }
+        else{
+            return address;
+        }
+    }
     public Optional<Address> getOneAddressById(Long addressId){
-        return addressRepository.findById(addressId);
+        //return addressRepository.findById(addressId);
+        Optional<Address> address = addressRepository.findById(addressId);
+        if(address.isPresent()){
+            return addressRepository.findById(addressId);
+        }
+        else{
+            throw new AddressNotFoundException("Address with id:" + addressId +" is not found.");
+        }
+
     }
     public Address createAddress(AddressCreateRequest addressCreateRequest){
         Address newAddress = new Address();
@@ -47,6 +64,13 @@ public class AddressEntityService {
         }
     }
     public void deleteById(Long addressId){
-        addressRepository.deleteById(addressId);
+        //addressRepository.deleteById(addressId);
+        Optional<Address> address = addressRepository.findById(addressId);
+        if(address.isPresent()){
+            addressRepository.deleteById(addressId);
+        }
+        else{
+            throw new AddressNotFoundException("Address with id:" + addressId +" is not found.");
+        }
     }
 }

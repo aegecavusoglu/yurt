@@ -3,6 +3,8 @@ package com.example.yurt2.service;
 import com.example.yurt2.entity.Room;
 import com.example.yurt2.entity.Student;
 import com.example.yurt2.entity.StudentRoomRelation;
+import com.example.yurt2.exception.RoomNotFoundException;
+import com.example.yurt2.exception.RoomRelationNotFoundException;
 import org.springframework.stereotype.Service;
 
 
@@ -51,9 +53,15 @@ public class RoomService {
     public List<Student> getStudentInOneRoom(Long roomNumber) {
         List<StudentRoomRelation> studentRoomRelation= getAllRelationsForOneRoomByRoomNumber(roomNumber);
         List<Student> students=new ArrayList<>();
-        for (int i=0;i<studentRoomRelation.size();i++){
-            students.add(studentService.getOneStudentById(studentRoomRelation.get(i).getStudentId()));
+        if (studentRoomRelation.isEmpty()){
+            throw new RoomRelationNotFoundException("Relation could not found for this roomNumber.");
         }
-        return students;
+        else{
+            for (int i=0;i<studentRoomRelation.size();i++){
+                students.add(studentService.getOneStudentById(studentRoomRelation.get(i).getStudentId()));
+            }
+            return students;
+        }
+
     }
 }

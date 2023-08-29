@@ -2,6 +2,7 @@ package com.example.yurt2.service;
 
 import com.example.yurt2.entity.Room;
 import com.example.yurt2.entity.RoomFeature;
+import com.example.yurt2.exception.RoomNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -86,6 +87,7 @@ public class RoomFeatureService {
 
     public List<RoomFeature> findRoomFeatureByRoomNumber(Long roomNumber) {
         return roomFeatureEntityService.findRoomFeatureByRoomId(findRoomIdByRoomNumber(roomNumber));
+
     }
 
     public Long findRoomIdByRoomNumber(Long roomNumber){
