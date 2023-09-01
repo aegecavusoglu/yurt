@@ -53,15 +53,17 @@ public class AddressStudentRelationEntityService {
     }
 
     public List<AddressStudentRelation> getOneAddressStudentRelationByStudentId(Long studentId) {
-        //return addressStudentRelationRepository.findByStudentId(studentId);
+        return addressStudentRelationRepository.findByStudentId(studentId);
+
+        /*
         List<AddressStudentRelation> addressStudentRelation = addressStudentRelationRepository.findByStudentId(studentId);
         if(addressStudentRelation.isEmpty()){
             throw new StudentNotFoundException("Student with id:" + studentId +" could not found.");
         }
         else{
-
             return addressStudentRelationRepository.findByStudentId(studentId);
         }
+         */
 
     }
 

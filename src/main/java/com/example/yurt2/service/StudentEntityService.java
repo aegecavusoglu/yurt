@@ -6,6 +6,7 @@ import com.example.yurt2.exception.RoomNotFoundException;
 import com.example.yurt2.exception.StudentNotFoundException;
 import com.example.yurt2.repository.StudentRepository;
 import com.example.yurt2.request.StudentCreateRequest;
+import com.example.yurt2.validator.IdentityNumberValidator;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +15,8 @@ import java.util.Optional;
 @Service
 public class StudentEntityService {
     private StudentRepository studentRepository;
-    public StudentEntityService(StudentRepository studentRepository){
+
+    public StudentEntityService(StudentRepository studentRepository,IdentityNumberValidator identityNumberValidator){
         this.studentRepository=studentRepository;
     }
     public List<Student> getAllStudents(){
