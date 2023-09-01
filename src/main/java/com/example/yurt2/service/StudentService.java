@@ -6,6 +6,7 @@ import com.example.yurt2.entity.Student;
 import com.example.yurt2.request.AddressCreateRequest;
 import com.example.yurt2.request.StudentCreateRequest;
 import com.example.yurt2.validator.IdentityNumberValidator;
+import com.example.yurt2.validator.PhoneNumberValidator;
 import org.springframework.data.relational.core.sql.TrueCondition;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -23,12 +24,15 @@ public class StudentService {
     AddressStudentRelationService addressStudentRelationService;
     private final IdentityNumberValidator identityNumberValidator;
     private final TransactionTemplate transactionTemplate;
-    public StudentService(StudentEntityService studentEntityService, AddressService addressService, PlatformTransactionManager transactionTemplate, AddressStudentRelationService addressStudentRelationService,IdentityNumberValidator identityNumberValidator) {
+    private final PhoneNumberValidator phoneNumberValidator;
+    public StudentService(StudentEntityService studentEntityService, AddressService addressService, PlatformTransactionManager transactionTemplate, AddressStudentRelationService addressStudentRelationService,
+                          IdentityNumberValidator identityNumberValidator,PhoneNumberValidator phoneNumberValidator) {
         this.addressService=addressService;
         this.studentEntityService = studentEntityService;
         this.transactionTemplate = new TransactionTemplate(transactionTemplate);
         this.addressStudentRelationService = addressStudentRelationService;
         this.identityNumberValidator=identityNumberValidator;
+        this.phoneNumberValidator=phoneNumberValidator;
     }
     public List<Student> getAllStudents(){
         return studentEntityService.getAllStudents();
@@ -38,7 +42,7 @@ public class StudentService {
     }
     public Student createStudent(StudentCreateRequest studentCreateRequest){
         identityNumberValidator.validate(studentCreateRequest);
-
+        phoneNumberValidator.validate(studentCreateRequest);
         var studentStatus = transactionTemplate.execute(p-> {
             Address address = addressService.createAddress(studentCreateRequest.getAddressCreateRequest());
             studentCreateRequest.setAddressId(address.getId());
