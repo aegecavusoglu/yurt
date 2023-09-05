@@ -4,8 +4,11 @@ import com.example.yurt2.entity.Student;
 import com.example.yurt2.request.AddressCreateRequest;
 import com.example.yurt2.request.StudentCreateRequest;
 import com.example.yurt2.service.StudentService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,8 +23,8 @@ public class StudentController {
         return studentService.createStudent(studentCreateRequest);
     }
     @GetMapping("/{studentId}")
-    public Student getOneStudent(@PathVariable Long studentId){
-        return studentService.getOneStudentById(studentId);
+    public Student getOneStudent(@PathVariable Long studentId, HttpServletResponse httpServletResponse) throws IOException {
+        return studentService.getOneStudentById(studentId, httpServletResponse);
     }
     @GetMapping
     public List<Student> gelAllStudent(){

@@ -31,7 +31,7 @@ public class StudentEntityService {
         }
     }
     public Student getOneStudentById(Long studentId){
-        return studentRepository.findById(studentId).orElseThrow(()-> new StudentNotFoundException("No students can be found by this id."));
+        return studentRepository.findById(studentId).orElse(null);
     }
     public Student createStudent(StudentCreateRequest studentCreateRequest){
         Student newStudent = new Student();
