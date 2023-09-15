@@ -37,7 +37,7 @@ public class StudentContractEntityService {
     }
 
     public StudentContract getOneContractByStudentId(Long studentId) {
-        return studentContractRepository.findByStudentIdAndIsValidIsTrue(studentId).orElseThrow(()->new ContractNotFoundException("There are no contracts available for this student."));
+        return studentContractRepository.findByStudentIdAndIsValidIsTrue(studentId).orElse(null);
     }
 
     public StudentContract createOneContract(StudentContractCreateRequest studentContractCreateRequest) {
