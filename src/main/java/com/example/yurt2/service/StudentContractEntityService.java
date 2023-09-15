@@ -87,13 +87,6 @@ public class StudentContractEntityService {
 
     }
     public int findActiveStudentsNumberByRoomId(Long roomId){
-        int activeStudents = studentContractRepository.findActiveStudentsNumberByRoomId(roomId);
-        if(activeStudents!=0){
-            return activeStudents;
-        }
-        else{
-            throw new StudentNotFoundException("There are no active student enrolled in this room.");
-        }
-        //return studentContractRepository.findActiveStudentsNumberByRoomId(roomId);
+        return studentContractRepository.findActiveStudentsNumberByRoomId(roomId);
     }
 }
