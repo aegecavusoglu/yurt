@@ -1,8 +1,6 @@
 package com.example.yurt2.service;
 
-import com.example.yurt2.entity.Room;
 import com.example.yurt2.entity.RoomFeature;
-import com.example.yurt2.exception.RoomNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -16,15 +14,13 @@ public class RoomFeatureService {
     RoomFeatureEntityService roomFeatureEntityService;
     StudentContractEntityService studentContractEntityService;
     DormitoryService dormitoryService;
-    RoomService roomService;
     private final TransactionTemplate transactionTemplate;
 
-    public RoomFeatureService(RoomFeatureEntityService roomFeatureEntityService, StudentContractEntityService studentContractEntityService, PlatformTransactionManager transactionTemplate, DormitoryService dormitoryService,RoomService roomService ) {
+    public RoomFeatureService(RoomFeatureEntityService roomFeatureEntityService, StudentContractEntityService studentContractEntityService, PlatformTransactionManager transactionTemplate, DormitoryService dormitoryService ) {
         this.roomFeatureEntityService = roomFeatureEntityService;
         this.studentContractEntityService = studentContractEntityService;
         this.transactionTemplate = new TransactionTemplate(transactionTemplate);
         this.dormitoryService = dormitoryService;
-        this.roomService=roomService;
     }
 
 
@@ -85,13 +81,10 @@ public class RoomFeatureService {
         roomFeatureEntityService.updateInstanceRoomCapacity(roomId,instanceRoomCapacity);
     }
 
-    public List<RoomFeature> findRoomFeatureByRoomNumber(Long roomNumber) {
-        return roomFeatureEntityService.findRoomFeatureByRoomId(findRoomIdByRoomNumber(roomNumber));
+    public List<RoomFeature> findRoomFeatureByRoomId(Long roomId) {
+        return roomFeatureEntityService.findRoomFeatureByRoomId(roomId);
 
     }
 
-    public Long findRoomIdByRoomNumber(Long roomNumber){
-        Room room=roomService.getOneRoomByRoomNumber(roomNumber);
-        return room.getId();
-    }
+
 }

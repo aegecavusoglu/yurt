@@ -1,9 +1,11 @@
 package com.example.yurt2.service;
 
+import com.example.yurt2.dto.RoomInfo;
 import com.example.yurt2.entity.Room;
+import com.example.yurt2.entity.Dormitory;
+import com.example.yurt2.entity.RoomFeature;
 import com.example.yurt2.entity.Student;
 import com.example.yurt2.entity.StudentRoomRelation;
-import com.example.yurt2.exception.RoomNotFoundException;
 import com.example.yurt2.exception.RoomRelationNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -11,21 +13,54 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Service
 public class RoomService {
-    RoomEntityService roomEntityService;
-    StudentRoomRelationEntityService studentRoomRelationEntityService;
-    StudentService studentService;
+    private final RoomEntityService roomEntityService;
+    private final StudentRoomRelationEntityService studentRoomRelationEntityService;
+    private final StudentService studentService;
+    private final DormitoryService dormitoryService;
+    private final RoomFeatureService roomFeatureService;
 
 
-    public RoomService(RoomEntityService roomEntityService,StudentRoomRelationEntityService studentRoomRelationEntityService,StudentService studentService) {
+    public RoomService(RoomEntityService roomEntityService, StudentRoomRelationEntityService studentRoomRelationEntityService,
+                       StudentService studentService, DormitoryService dormitoryService, RoomFeatureService roomFeatureService) {
         this.roomEntityService = roomEntityService;
         this.studentRoomRelationEntityService=studentRoomRelationEntityService;
         this.studentService=studentService;
+        this.dormitoryService = dormitoryService;
+
+        this.roomFeatureService = roomFeatureService;
     }
     public List<Room> getAllRooms() {
         return roomEntityService.getAllRooms();
     }
+
+    public List<RoomInfo> getAllRoomInfo() {
+
+        List<RoomInfo> resp = new ArrayList<>();
+
+        var rooms = roomEntityService.getAllRooms();
+
+        for (Room room : rooms) {
+            var dormitoryObj = dormitoryService.getOneDormitoryById(room.getDormitoryId());
+            var roomFeatureObj = roomFeatureService.getOneRoomFeatureByRoomId(room.getId());
+            var roomInfo = new RoomInfo();
+            var dormitory = (Dormitory) dormitoryObj;
+            var roomFeature = (RoomFeature) roomFeatureObj;
+
+            roomInfo.setRoom(room);
+            roomInfo.setName(dormitory.getName());
+            roomInfo.setRoomType(roomFeature.getRoomType());
+            roomInfo.setInstantRoomCapacity(roomFeature.getInstantRoomCapacity());
+            roomInfo.setPrice(roomFeature.getPrice());
+            resp.add(roomInfo);
+        }
+
+        return resp;
+
+    }
+
     public Room getOneRoomByRoomNumber(Long roomNumber) {
         return roomEntityService.getOneRoomByRoomNumber(roomNumber);
 
@@ -64,4 +99,11 @@ public class RoomService {
         }
 
     }
+
+    public List<RoomFeature> findRoomFeatureByRoomNumber(Long roomNumber) {
+        var roomId = getOneRoomByRoomNumber(roomNumber).getId();
+        return roomFeatureService.findRoomFeatureByRoomId(roomId);
+
+    }
+
 }

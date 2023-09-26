@@ -48,11 +48,6 @@ public class AddressStudentRelation {
     public void setStudentId(Long studentId) {
         this.studentId = studentId;
     }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
     public void setActive(boolean active) {
         isActive = active;
     }

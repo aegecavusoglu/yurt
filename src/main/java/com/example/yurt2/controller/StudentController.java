@@ -1,5 +1,6 @@
 package com.example.yurt2.controller;
 
+import com.example.yurt2.dto.StudentInfo;
 import com.example.yurt2.entity.Student;
 import com.example.yurt2.request.AddressCreateRequest;
 import com.example.yurt2.request.StudentCreateRequest;
@@ -30,6 +31,11 @@ public class StudentController {
     public List<Student> gelAllStudent(){
         return studentService.getAllStudents();
     }
+    @GetMapping("/student-info")
+    public List<StudentInfo> gelAllStudentInfo(){
+        return studentService.getAllStudentInfo();
+    }
+
     @PutMapping("/update/{studentId}")
     public Student updateStudent(@PathVariable Long studentId, @RequestBody Student newStudent){
         return studentService.updateStudent(studentId,newStudent);

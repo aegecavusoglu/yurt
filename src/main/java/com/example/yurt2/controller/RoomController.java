@@ -1,6 +1,8 @@
 package com.example.yurt2.controller;
 
+import com.example.yurt2.dto.RoomInfo;
 import com.example.yurt2.entity.Room;
+import com.example.yurt2.entity.RoomFeature;
 import com.example.yurt2.entity.Student;
 import com.example.yurt2.service.RoomService;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,12 @@ public class RoomController {
     @GetMapping
     public List<Room> getAllRooms(){
         return roomService.getAllRooms();
+    }
+
+
+    @GetMapping("/room-info")
+    public List<RoomInfo> gelAllRoomInfo(){
+        return roomService.getAllRoomInfo();
     }
 
     @GetMapping("/{roomNumber}")
@@ -44,4 +52,8 @@ public class RoomController {
         return roomService.getStudentInOneRoom(roomNumber);
     }
 
+    @GetMapping("/oneRoomFeature/{roomNumber}")
+    public List<RoomFeature> findRoomFeatureByRoomNumber(@PathVariable Long roomNumber){
+        return roomService.findRoomFeatureByRoomNumber(roomNumber);
+    }
 }

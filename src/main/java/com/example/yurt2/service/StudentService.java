@@ -1,14 +1,12 @@
 package com.example.yurt2.service;
 
-import com.example.yurt2.entity.Address;
-import com.example.yurt2.entity.AddressStudentRelation;
-import com.example.yurt2.entity.Student;
+import com.example.yurt2.dto.StudentInfo;
+import com.example.yurt2.entity.*;
 import com.example.yurt2.exception.StudentNotFoundException;
 import com.example.yurt2.request.AddressCreateRequest;
 import com.example.yurt2.request.StudentCreateRequest;
 import com.example.yurt2.validator.*;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.data.relational.core.sql.TrueCondition;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -17,25 +15,28 @@ import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class StudentService {
-    StudentEntityService studentEntityService;
-    AddressService addressService;
-    AddressStudentRelationService addressStudentRelationService;
+    private final StudentEntityService studentEntityService;
+    private final AddressService addressService;
+    private final AddressStudentRelationService addressStudentRelationService;
+    private final StudentContractEntityService studentContractEntityService;
     private final IdentityNumberValidator identityNumberValidator;
     private final TransactionTemplate transactionTemplate;
     private final PhoneNumberValidator phoneNumberValidator;
     private final NameValidator nameValidator;
     private final SurnameValidator surnameValidator;
     private final SchoolNameValidator schoolNameValidator;
-    public StudentService(StudentEntityService studentEntityService, AddressService addressService, PlatformTransactionManager transactionTemplate, AddressStudentRelationService addressStudentRelationService,
-                          IdentityNumberValidator identityNumberValidator,PhoneNumberValidator phoneNumberValidator,NameValidator nameValidator,SurnameValidator surnameValidator,
+    public StudentService(StudentEntityService studentEntityService, AddressService addressService, StudentContractEntityService studentContractEntityService, PlatformTransactionManager transactionTemplate, AddressStudentRelationService addressStudentRelationService,
+                          IdentityNumberValidator identityNumberValidator, PhoneNumberValidator phoneNumberValidator, NameValidator nameValidator, SurnameValidator surnameValidator,
                           SchoolNameValidator schoolNameValidator) {
         this.addressService=addressService;
         this.studentEntityService = studentEntityService;
+        this.studentContractEntityService = studentContractEntityService;
         this.transactionTemplate = new TransactionTemplate(transactionTemplate);
         this.addressStudentRelationService = addressStudentRelationService;
         this.identityNumberValidator=identityNumberValidator;
@@ -46,6 +47,30 @@ public class StudentService {
     }
     public List<Student> getAllStudents(){
         return studentEntityService.getAllStudents();
+    }
+    public List<StudentInfo> getAllStudentInfo() {
+
+        List<StudentInfo> resp = new ArrayList<>();
+
+        var students = studentEntityService.getAllStudents();
+
+        for (Student student : students) {
+            var address = addressService.getOneAddressById(student.getAddressId());
+            var studentContract = studentContractEntityService.getOneContractByStudentId(student.getId());
+            var studentInfo = new StudentInfo();
+
+            studentInfo.setStudent(student);
+            studentInfo.setCity(address.get().getCity());
+            studentInfo.setStreet(address.get().getStreet());
+            studentInfo.setCountry(address.get().getCountry());
+            studentInfo.setAddressDescription(address.get().getAddressDescription());
+            studentInfo.setAddressType(address.get().getAddressType());
+            studentInfo.setIsValid(studentContract.getIsValid());
+            resp.add(studentInfo);
+        }
+
+        return resp;
+
     }
     public Student getOneStudentById(Long studentId, HttpServletResponse httpServletResponse) throws IOException {
         var student = studentEntityService.getOneStudentById(studentId);
@@ -126,4 +151,5 @@ public class StudentService {
     public List<Student> getStudentBySchoolName(String schoolName) {
         return studentEntityService.getStudentBySchoolName(schoolName);
     }
+
 }

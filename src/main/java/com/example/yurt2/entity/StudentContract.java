@@ -71,4 +71,8 @@ public class StudentContract {
     public void setIsValid(boolean isValid) {
         this.isValid = isValid;
     }
+
+    public boolean getIsValid() {
+        return isValid;
+    }
 }

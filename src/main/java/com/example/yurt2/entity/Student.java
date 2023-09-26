@@ -1,29 +1,31 @@
 package com.example.yurt2.entity;
 
 import jakarta.persistence.*;
-
+import jakarta.persistence.*;
+import lombok.Getter;
 
 @Entity
 @Table(name="Student")
 public class Student {
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="identity_number")
+    @Column(name = "identity_number")
     private String identityNumber;
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
-    @Column(name="surname")
+    @Column(name = "surname")
     private String surname;
-    @Column(name="phone_number")
+    @Column(name = "phone_number")
     private String phoneNumber;
-    @Column(name="family_number")
+    @Column(name = "family_number")
     private String familyNumber;
-    @Column(name="address_id")
+    @Column(name = "address_id")
     private Long addressId;
-    @Column(name="school_name")
+    @Column(name = "school_name")
     private String schoolName;
+
 
     public Student(Long id, String identityNumber, String name, String surname, String phoneNumber, String familyNumber, Long addressId, String schoolName) {
         this.id = id;
@@ -36,7 +38,8 @@ public class Student {
         this.schoolName = schoolName;
     }
 
-    public Student(){}
+    public Student() {
+    }
 
     public Long getId() {
         return id;
@@ -102,3 +105,7 @@ public class Student {
         this.schoolName = schoolName;
     }
 }
+
+
+
+
